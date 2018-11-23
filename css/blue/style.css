@@ -1,0 +1,241 @@
+body {
+	margin:0;
+	background-color:#dddddd;
+	font: 14px Verdana, sans-serif;
+	color:#333333;
+}
+
+#wrapper {
+	margin:20px auto;
+	min-width:650px;
+	max-width:1100px;
+}
+
+#header {
+	background-color:#369DD9;
+	color:white;
+	margin:0 10px 20px 10px;
+	padding:10px 10px 0 10px;
+	font-size:30px;
+	background-image:url("../images/blue/linux-logo.png");
+	background-repeat:no-repeat;
+	background-size:contain;
+	background-position:right;
+	z-index:20;
+	position:relative;
+}
+
+#siderMenu {
+	background-color:#F1FAFF;
+	float:right;
+	width:200px;
+	padding:10px;
+	margin:30px;
+}
+
+#siderMenu h1 {
+	font-size:14px;
+	padding-bottom:5px;
+	border-bottom:2px solid #365FA3;
+}
+
+#siderMenu ul {
+	list-style:none;
+	padding-left:10px;
+}
+
+#siderMenu ul li{
+	margin-bottom:10px;
+}
+
+#content {
+	background-color:#fff;
+	padding:30px 10px 10px 10px;
+	margin:-50px 20px 10px 20px;
+	min-height:550px;
+}
+
+#content ul {
+	list-style: none;
+	list-style-position:inside;
+	padding:10px;
+	margin:0;
+}
+
+#content li.topMenu{
+	background-color:#F1FAFF;
+	margin:10px;
+	padding:10px 10px 10px 10px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 10px #777;
+	transition-duration:0.5s;
+}
+
+#content li.topMenu span {
+	display:list-item;
+	font-size:18px;
+	background-repeat:no-repeat;
+	background-position:left top;
+	text-align:left;
+	padding:20px 10px 0px 74px;
+	height:51px;
+}
+
+#content li.subMenu{
+	display:block;
+	background-color:#FFF;
+	margin:10px;
+	padding:10px 10px 10px 37px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px #777;
+	transition-duration:0.5s;
+	background-image:url("../images/blue/bullet-blue-icon-32.png");
+	background-repeat:no-repeat;
+	background-position:left center;
+}	
+
+#content li.subMenu:hover{
+	background-color:#EEE;
+}	
+
+
+#admin span{
+	background-image:url("../images/blue/icons/64/admin-icon-64.png");
+
+}
+
+#bash span{
+	background-image:url("../images/blue/icons/64/bash-icon-64.png");
+
+}
+
+#hotkeys span{
+	background-image:url("../images/blue/icons/64/hotkeys-icon-64.png");
+
+}
+
+#kernel span{
+	background-image:url("../images/blue/icons/64/kernel-icon-64.png");
+
+}
+
+#fs span{
+	background-image:url("../images/blue/icons/64/fs-icon-64.png");
+}
+
+.panel {
+	border-radius: 10px;
+	box-shadow: 5px 5px 10px #777;
+}
+
+nav ul.topMenu {
+	padding:10px;
+	margin:10px 0 0 0;
+	font-size:12px;
+	list-style: none;
+}
+
+nav ul.topMenu li{
+	display:inline;
+	margin:0 5px 0 0;
+}
+
+nav ul.topMenu a {
+	font-weight:normal;
+	color: white;
+}
+
+nav ul.topMenu a:hover {
+	color: #FCFC6F;
+}
+
+a {
+	color:#333333;
+	font-weight:normal;
+	text-decoration:underline;
+	transition-property:color;
+	transition-duration:0.2s;
+}
+
+a:hover {
+	color:red;
+}
+
+li{
+	margin-bottom:10px;
+}
+
+.value {
+	color:#444444;
+	font-weight:bold;
+	white-space:nowrap;
+}
+
+td.desc {
+	text-align:justify;
+}
+
+td.check {
+	text-align:center;
+}
+
+span.subst {
+	font-style:italic;
+	color:#CC0000;
+}
+
+h1 {
+	text-align:center;
+	color:#365F91;
+}
+
+h2 {
+	color:#4F81BD;
+}
+
+p {
+	text-align:justify;
+	text-indent:1.5em;
+	margin-left:10px;
+	margin-right:10px;
+}
+
+table.valueTable {
+	background-color:#EEE;
+	border-collapse:collapse;
+	margin-left:auto;
+	margin-right:auto;
+	box-shadow: 5px 5px 5px #777;
+}
+
+table td, th {
+	padding:10px;
+}
+
+table tr:hover {
+	background-color:#BFC8CD;
+	transition-duration:1s;
+}
+
+table.valueTable td, th {
+	border-bottom:1px dashed #4F81BD;
+	border-left:1px dashed #4F81BD;
+}
+
+table.valueTable td.value, th.value {
+	border-left:none;
+}
+
+table.valueTable th {
+	background-color:#F1FAFF;
+}
+
+.example {
+	margin-left:10px;
+	font:12px Verdana,sans-serif;
+}
+
+.clear {
+	clear:both;
+}
+

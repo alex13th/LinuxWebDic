@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="../../css/style.css"  type="text/css" rel="stylesheet">
+		<title>Справочник по Linux - Ядро</title>
+	</head>
+	<body>
+		<div class="pageWrapper">
+			<header>
+				<nav class="mainMenu">
+					<ul class="topMenu">
+						<li class="activeMenu"><a href="../../general/index.html">Основы</a></li>
+						<li><a href="../../virtualbox/index.html">VirtualBox</a></li>
+						<li><a href="../../vagrant/index.html">Vagrant</a></li>
+						<li><a href="../../ansible/index.html">Ansible</a></li>
+					</ul>
+				</nav>
+			</header>
+			<nav class="sideMenu">
+				<h2>Основы</h2>
+				<ul class="topMenu">
+					<li id="admin"><a href="../admin/index.html">Администрирование</a>
+					</li>
+					<li id="hotkeys"><a href="../hotkeys/index.html">Сочетания клавиш</a>
+					</li>
+					<li id="bash"><a href="../bash/index.html">Bash</a>
+					</li>
+					<li id="fs"><a href="../fs/index.html">Файловая система</a>
+					</li>
+					<li id="kernel" class="activeMenu"><a href="index.html">Ядро</a>
+						<ul class="subMenu">
+							<li><a href="critical-ps.html">Важные процессы</a></li>
+							<li><a href="critical-threads.html">Важные потоки ядра</a></li>
+							<li class="activeMenu"><a href="inittab.html">Inittab</a></li>
+							<li><a href="runlevels-RH.html">Уровни в Red Hat</a></li>
+							<li><a href="runlevels-Deb.html">Уровни  в Debian</a></li>
+							<li><a href="init-params.html">Параметры Init-V-Script</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<main>
+				<h1>Inittab - Ключевые слова Action</h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Ключевое слово</th>
+						<th>Значение</th>
+					</tr>
+					<tr>
+						<td class="value">ctrlaltdel</td>
+						<td class="desc">Указывает, как init должна реагировать на Ctrl+Alt+Delete</td>
+					</tr>
+					<tr>
+						<td class="value">initdefault</td>
+						<td class="desc">Определяет стандартный уровень запуска для init</td>
+					</tr>
+					<tr>
+						<td class="value">once</td>
+						<td class="desc">init выполняет указанную команду при смене уровня запуска</td>
+					</tr>
+					<tr>
+						<td class="value">respawn</td>
+						<td class="desc">После окончания выполнения команды init снова ее запускает</td>
+					</tr>
+					<tr>
+						<td class="value">sysinit</td>
+						<td class="desc">init один раз выполняет команду в процессе загрузки</td>
+					</tr>
+					<tr>
+						<td class="value">wait</td>
+						<td class="desc">init ожидает окончания выполнения следующей команды</td>
+					</tr>
+					<tr>
+						<td class="value">bootwait</td>
+						<td class="desc">init запускает команду в процессе загрузки и ожидает окончания выполнения следующей команды</td>
+					</tr>
+				</table>
+			</main>
+		</div>
+	</body>
+</html>

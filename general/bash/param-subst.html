@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="../../css/style.css"  type="text/css" rel="stylesheet">
+		<title>Справочник по основнам Linux - Bash</title>
+	</head>
+		<div class="pageWrapper">
+			<header>
+				<nav class="mainMenu">
+					<ul class="topMenu">
+						<li class="activeMenu"><a href="../../general/index.html">Основы</a></li>
+						<li><a href="../../virtualbox/index.html">VirtualBox</a></li>
+						<li><a href="../../vagrant/index.html">Vagrant</a></li>
+						<li><a href="../../ansible/index.html">Ansible</a></li>
+					</ul>
+				</nav>
+			</header>
+			<nav class="sideMenu">
+				<h2>Основы</h2>
+				<ul class="topMenu">
+					<li id="admin"><a href="../admin/index.html">Администрирование</a>
+					</li>
+					<li id="hotkeys"><a href="../hotkeys/index.html">Сочетания клавиш</a>
+					</li>
+					<li id="bash" class="activeMenu"><a href="index.html">Bash</a>
+						<ul class="subMenu">
+							<li><a href="io-redirect.html">Переадресация ввода/вывода</a></li>
+							<li><a href="substitution.html">Механизмы подстановки</a></li>
+							<li><a href="env-var.html">Переменные среды</a></li>
+							<li><a href="vars.html">$-переменные</a></li>
+							<li class="activeMenu"><a href="param-subst.html">Подстановка параметров</a></li>
+							<li><a href="test.html">Условия test</a></li>
+							<li><a href="symbols.html">Спец. символы в bash</a></li>
+						</ul>
+					</li>
+					<li id="fs"><a href="../fs/index.html">Файловая система</a>
+					</li>
+					<li id="kernel"><a href="../kernel/index.html">Ядро</a>
+					</li>
+				</ul>
+			</nav>
+			<main>
+				<article>
+					<h1>Подстановка параметров</h1>
+					<p class="desc">
+						<span class="value">${var:-default} </span> - 
+						если переменная пуста, такое выражение возвращает в качестве результата установку, заданную по умолчанию. 
+						В противном случае возвращается содержимое переменной. Сама переменная не изменяется.
+					</p>
+					<p class="desc">
+						<span class="value">${var:=default} </span> - 
+						аналогично предыдущему, однако если до операции переменная была пуста, ее содержимое изменяется.
+					</p>
+					<p class="desc"> 
+						<span class="value">${var:+new}</span> - 
+						если переменная была пуста, то она остается пустой. Если же переменная уже определена, то ее предыдущее содержимое 
+						заменяется новым. Тогда выражение возвращает новое содержимое переменной.
+					</p>
+					<p class="desc">
+						<span class="value">${var:? Error_message} </span> - 
+						если переменная пуста, то выводится имя переменной и сообщение об ошибке. Кроме того, программа оболочки завершает
+						работу. В противном случае выражение возвращает содержимое переменной.
+					</p>
+					<p class="desc">
+						<span class="value">${#var} </span> - 
+						в качестве результата возвращает количество символов, сохраненных в переменной (0, если переменная пуста). Переменная не изменяется.
+					</p>
+					<p class="desc">
+						<span class="value">${var#pattern} </span> - 
+						сравнивает начало переменной с заданным шаблоном. Если удается опознать шаблон, то выражение возвращает содержимое переменной 
+						за исключением самого краткого фрагмента текста, хранящего поисковый шаблон. Если же соответствий шаблону найти не удается, 
+						то возвращается содержимое переменной целиком. В поисковом шаблоне можно использовать подстановочные символы, с которыми мы познакомились, 
+						обсуждая образование имен файлов ( * ? [abc] ). Переменная в любом случае остается неизменной:
+						<br><br>
+						<samp>
+							dat=/home/mk/buch/buch.tar.gz<br>
+							echo ${dat#*/}<br>
+							<span class="value">$home/mk/buch/buch.tar.gz</span>
+						<br><br>
+							echo ${dat#*.}<br>
+							<span class="value">tar.gz</span>
+						</samp>
+					</p>
+					<p class="desc">
+						<span class="value">${var##pattern} </span> - 
+						аналогично предыдущему, но теперь удаляется самый крупный фрагмент текста, содержащий поисковый шаблон:
+						<br><br>
+						<samp>
+							dat=/home/mk/buch/buch.tar.gz<br>
+							echo ${dat##*/}<br>
+							<span class="value">buch.tar.gz</span>
+						<br><br>
+							echo ${dat##*.}<br>
+							<span class="value">gz</span>
+						</samp>
+					</p>
+					<p class="desc">
+						<span class="value">${var%pattern} </span> - 
+						аналогично  ${var#pattern} , но в данном случае сопоставление образцов производится в конце содержимого 
+						переменной. В конце переменной удаляется кратчайший фрагмент, содержащий поисковый шаблон. 
+						Сама переменная не изменяется:
+						<br><br>
+						<samp>
+							dat=/home/mk/buch/buch.tar.gz<br>
+							echo ${dat%/*}<br>
+							<span class="value">/home/mk/buch</span>
+						<br><br>
+							echo ${dat%.*}<br>
+							<span class="value">/home/mk/buch/buch.tar</span>
+						</samp>
+					</p>
+					<p class="desc">
+						<span class="value">${var%% pattern} </span> - 
+						аналогично предыдущему, но теперь удаляется самый крупный фрагмент текста, 
+						содержащий поисковый шаблон и находящийся в конце переменной:
+						<br><br>
+						<samp>
+							dat=/home/mk/buch/buch.tar.gz<br>
+							echo ${dat%%/*}<br>
+							<span class="value">-- вывод отсутствует --</span>
+						<br><br>
+							echo ${dat%%.*}<br>
+							<span class="value">/home/mk/buch/buch</span>
+						</samp>
+					</p>
+					<p class="desc">
+						<span class="value">${var/find/replace} </span> - 
+						замена первого совпадения с шаблоном  find  посредством replace:
+						<br><br>
+						<samp>
+							x='abcdeab12ab'<br>
+							echo echo ${x/ab/xy}<br>
+							<span class="value">xycdeab12ab</span>
+						</samp>
+					</p>
+					<p class="desc">
+						<span class="value">${var//find/replace}</span> - 
+						замена всех совпадений с шаблоном  find  посредством replace:
+						<br><br>
+						<samp>
+							x='abcdeab12ab'<br>
+							echo echo ${x//ab/xy}<br>
+							<span class="value">xycdexy12xy</span>
+						<samp>
+					</p>
+					<p class="desc">
+						<span class="value">${!var} </span> - 
+						возврат содержимого переменной, имя которой в виде последовательности символов содержится в  var:
+						<br><br>
+						<samp>
+							abc="123"<br>
+							efg=abc<br>
+							echo ${!efg}<br>
+							<span class="value">123</span>
+						</samp>
+					</p>
+				</article>
+			</main>
+		</div>
+	</body>
+</html>

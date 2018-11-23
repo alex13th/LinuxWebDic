@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="../../css/style.css"  type="text/css" rel="stylesheet">
+		<title>Справочник по Linux - Ядро</title>
+	</head>
+	<body>
+
+		<div class="pageWrapper">
+			<header>
+				<nav class="mainMenu">
+					<ul class="topMenu">
+						<li class="activeMenu"><a href="../../general/index.html">Основы</a></li>
+						<li><a href="../../virtualbox/index.html">VirtualBox</a></li>
+						<li><a href="../../vagrant/index.html">Vagrant</a></li>
+						<li><a href="../../ansible/index.html">Ansible</a></li>
+					</ul>
+				</nav>
+			</header>
+			<nav class="sideMenu">
+				<h2>Основы</h2>
+				<ul class="topMenu">
+					<li id="admin"><a href="../admin/index.html">Администрирование</a>
+					</li>
+					<li id="hotkeys"><a href="../hotkeys/index.html">Сочетания клавиш</a>
+					</li>
+					<li id="bash"><a href="../bash/index.html">Bash</a>
+					</li>
+					<li id="fs"><a href="../fs/index.html">Файловая система</a>
+					</li>
+					<li id="kernel" class="activeMenu"><a href="index.html">Ядро</a>
+						<ul class="subMenu">
+							<li class="activeMenu"><a href="critical-ps.html">Важные процессы</a></li>
+							<li><a href="critical-threads.html">Важные потоки ядра</a></li>
+							<li><a href="inittab.html">Inittab</a></li>
+							<li><a href="runlevels-RH.html">Уровни в Red Hat</a></li>
+							<li><a href="runlevels-Deb.html">Уровни  в Debian</a></li>
+							<li><a href="init-params.html">Параметры Init-V-Script</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<main>
+				<h1>Важные системные процессы</h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Процесс</th>
+						<th>Значение</th>
+					</tr>
+					<tr>
+						<td class="value">afpd</td>
+						<td class="desc">Сервер для Apple Filing Protocol</td>
+					</tr>
+					<tr>
+						<td class="value">apache2</td>
+						<td class="desc">Веб-сервер</td>
+					</tr>
+					<tr>
+						<td class="value">atd</td>
+						<td class="desc">Запуск других программ в заданное время (подобно cron)</td>
+					</tr>
+					<tr>
+						<td class="value">avahi-daemon</td>
+						<td class="desc">Автоматическая конфигурация сети (ZeroConf, Rendezvous, Bonjour)</td>
+					</tr>
+					<tr>
+						<td class="value">bluetoothd</td>
+						<td class="desc">Управление технологией Bluetooth</td>
+					</tr>
+					<tr>
+						<td class="value">cron</td>
+						<td class="desc">Запуск других программ в заданное время</td>
+					</tr>
+					<tr>
+						<td class="value">cupsd</td>
+						<td class="desc">Диспетчер печати</td>
+					</tr>
+					<tr>
+						<td class="value">dbus-daemon</td>
+						<td class="desc">Обмен данными через шину <abbr title="Desktop Bus">D-BUS</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">dhclient</td>
+						<td class="desc"><abbr title="Dynamic Host Configuration Protocol">DHCP</abbr>-клиент</td>
+					</tr>
+					<tr>
+						<td class="value">dhcpd</td>
+						<td class="desc">Присваивание другим компьютерам сетевого IP-адреса</td>
+					</tr>
+					<tr>
+						<td class="value">dhcpcd</td>
+						<td class="desc">Считывание сетевого IP-адреса</td>
+					</tr>
+					<tr>
+						<td class="value">gdm</td>
+						<td class="desc">Менеджер учетных записей Gnome</td>
+					</tr>
+					<tr>
+						<td class="value">gpm</td>
+						<td class="desc">Управление мышью для текстовых консолей</td>
+					</tr>
+					<tr>
+						<td class="value">hpiod</td>
+						<td class="desc">Функции печати и сканирования <abbr title="Hewlett-Packard">HP</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">httpd</td>
+						<td class="desc">Веб-сервер (например, Apache)</td>
+					</tr>
+					<tr>
+						<td class="value">kdm</td>
+						<td class="desc">Менеджер учетных записей <abbr title="Kool Desktop Environment, Kosher Desktop Environment, Kthulhu Desktop Environment, Kawaii Desktop Environment, Keep Desktop Elegant или просто кеды">KDE</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">lockd</td>
+						<td class="desc">Функция <abbr title="Network File System">NFS</abbr>-Locking</td>
+					</tr>
+					<tr>
+						<td class="value">lpd</td>
+						<td class="desc">Обычный диспетчер печати на основе <abbr title="Berkeley Software Distribution">BSD</abbr>-<abbr title="Line Printer Daemon">LPD</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">mdnsd</td>
+						<td class="desc">Автоматическая конфигурация сети (ZeroConf, Rendezvous, Bonjour)</td>
+					</tr>
+					<tr>
+						<td class="value">mysqld</td>
+						<td class="desc">Сервер базы данных MySQL</td>
+					</tr>
+					<tr>
+						<td class="value">named</td>
+						<td class="desc">Сервер доменных имен</td>
+					</tr>
+					<tr>
+						<td class="value">NetworkManager</td>
+						<td class="desc">Устройство управления сетью</td>
+					</tr>
+					<tr>
+						<td class="value">nmbd</td>
+						<td class="desc">Сервер имен для Windows/Samba</td>
+					</tr>
+					<tr>
+						<td class="value">nscd</td>
+						<td class="desc">Кэш для хранения информации о пользователях, группах и именах компьютеров</td>
+					</tr>
+					<tr>
+						<td class="value">ntpd</td>
+						<td class="desc">Установка времени с помощью сетевого протокола синхронизации времени (Network Time Protocol)</td>
+					</tr>
+					<tr>
+						<td class="value">pppd</td>
+						<td class="desc"><abbr title="Virtual Private Network">VPN</abbr>-клиент, доступ к Интернету</td>
+					</tr>
+					<tr>
+						<td class="value">pptpd</td>
+						<td class="desc"><abbr title="Point-to-Point Tunneling Protocol">PPTP</abbr>-сервер для 
+						<abbr title="Virtual Private Network">VPN</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">portmap</td>
+						<td class="desc">Часть <abbr title="Network File System">NFS</abbr>-сервера</td>
+					</tr>
+					<tr>
+						<td class="value">postfix</td>
+						<td class="desc">Почтовый сервер для рассылки электронных сообщений</td>
+					</tr>
+					<tr>
+						<td class="value">rpc.*</td>
+						<td class="desc">Сетевые службы <abbr title="Remote Procedure Call">RPC</abbr> (удаленного вызова процедур), обычно для 
+						<abbr title="Network File System">NFS</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">sdpd</td>
+						<td class="desc">Управление технологией Bluetooth</td>
+					</tr>
+					<tr>
+						<td class="value">sendmail</td>
+						<td class="desc">Почтовый сервер для рассылки электронных сообщений</td>
+					</tr>
+					<tr>
+						<td class="value">smartd</td>
+						<td class="desc">Система оценки состояния жесткого диска 
+						<abbr title="Self-Monitoring, Analysis and Reporting Technology">SMART</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">smbd</td>
+						<td class="desc">Файловый сервер Windows/Samba</td>
+					</tr>
+					<tr>
+						<td class="value">squid</td>
+						<td class="desc">Сетевые прокси и сетевой кэш</td>
+					</tr>
+					<tr>
+						<td class="value">sshd</td>
+						<td class="desc">Сервер <abbr title="Secure Shell">SSH</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">rsyslogd</td>
+						<td class="desc">Протоколирование системных сообщений</td>
+					</tr>
+					<tr>
+						<td class="value">udevd</td>
+						<td class="desc">Управление устройствами</td>
+					</tr>
+					<tr>
+						<td class="value">vsftpd</td>
+						<td class="desc"><abbr title="File Transfer Protocol">FTP</abbr>-сервер</td>
+					</tr>
+					<tr>
+						<td class="value">xdm</td>
+						<td class="desc">Дисплейный менеджер для X</td>
+					</tr>
+					<tr>
+						<td class="value">xinetd</td>
+						<td class="desc">Запуск других сетевых демонов</td>
+					</tr>
+				</table>
+			</main>
+		</div>
+	</body>
+</html>

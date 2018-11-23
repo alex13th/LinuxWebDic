@@ -1,0 +1,277 @@
+body {
+	margin:0;
+	padding:0
+}
+
+p {
+	text-align:justify;
+}
+
+.pageWrapper {
+	display: flex;
+	flex-flow:row wrap;
+	background-color:#FFF;
+	max-width:1920px;
+}
+
+header, nav.mainMenu, footer {
+	flex-grow:1;
+	flex-basis:100%;
+}
+
+header {
+	font:18px Verdana, sans-serif;
+	margin:0;
+	padding:0;
+	background-color:#FEDB75;
+/*	box-shadow:0 5px 5px rgba(200, 200, 200, 0.7);*/
+	order:1;
+	z-index:10;
+}
+
+footer {
+	order:5;
+}
+
+main {
+	margin:20px 30px 30px 2px;
+}
+
+@media all and (max-width:750px){
+	header {
+		flex-grow:1;
+		order:1;
+	} 
+
+	nav.mainMenu > ul.topMenu {
+		display:none;
+	} 
+
+	main {
+		flex-grow:4;
+		flex-basis:100%;
+		order:4;
+	}
+
+	nav.sideMenu {
+		display:none;
+	} 
+	footer {
+		order:5;
+	}
+}
+
+@media all and (min-width: 750px) {
+	main {
+		flex-grow:4;
+		flex-basis:500px;
+		order:4;
+	}
+
+	nav.mainMenu > ul.topMenu {
+		display:flex;
+	}
+	
+	nav.sideMenu {
+		background-color:#EEE;
+		flex-grow:1;
+		flex-basis:100px;
+		border-right:1px solid #CCC;
+		order:3;
+	} 
+}
+  
+main > section {
+	background-color:#EEE;
+	display:flex;
+	flex-flow:row wrap;
+	margin:0 0 0 30px;
+}
+
+main > section > h2 {
+	color:#333;
+	width:100%;
+	background-color:#FFF;
+	padding:50px 30px 10px 30px;
+	margin:0 0 20px 0;
+	font:bold 20px Palatino Linotype;
+	text-align:left;
+}
+
+section > article {
+	margin:0 20px 40px 30px;
+	padding-bottom:40px;
+	background-color:#FFF;
+	flex-basis:200px;
+	flex-grow:1;
+	position:relative;
+	border-radius:5px;
+}
+
+section > article h3 {
+	font:24px Palatino Linotype;
+	padding:60px 30px 10px 30px;
+	color:#FFF;
+	margin:0px;
+	white-space:nowrap;
+	border-radius:5px;
+}
+
+section > article:nth-of-type(3n+1) > h3 {
+	background-color:#E5C25C;
+}
+
+section > article:nth-of-type(3n+2) > h3 {
+	background-color:#009688;
+}
+
+section > article:nth-of-type(3n+3) > h3 {
+	background-color:#36474F;
+}
+
+section > article > h3 > a {
+	text-decoration:none;
+	color:white;
+}
+
+section > article p {
+	font:18px Palatino Linotype;
+	padding:10px;
+}
+
+section > article > footer {
+	border-top:1px solid #DDD;
+	padding:5px;
+	overflow:hidden;
+	position:absolute;
+	bottom:0;
+	width:100%;
+}
+
+section > article > footer > time {
+	padding:10px;
+	float:left;
+}
+
+section > article > footer > span.author {
+	padding:10px;
+	float:right;
+}
+
+section > article > figure {
+	float:left;
+}
+
+figure {
+	display:none;
+	margin:5px 10px 5px 10px;
+}
+
+img {
+	max-width:96px;
+}
+
+header > div#logo {
+	height:150px;
+	width:470px;
+	background-repeat:no-repeat;
+	background-position:20px center;
+	background-image:url("../images/logo.png");
+	padding-left:40px;
+}
+
+nav.mainMenu h2 {
+	display:none;
+}
+
+nav.mainMenu > ul.topMenu {
+	flex-flow:row wrap;
+	justify-content:flex-end;
+	align-items:center;
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+nav.mainMenu > ul.topMenu > li {
+	margin:0;
+	padding:0 10px;
+}
+
+/*nav.mainMenu > ul.topMenu > li.active {
+	position:absolute;
+	left:20px;
+}
+
+nav.mainMenu > ul.topMenu > li.active a {
+	background-repeat:no-repeat;
+	background-position:left center;
+	background-image:url("../images/icons/mono/32/megaphone-icon.png");
+	padding-left:40px;
+}*/
+
+nav.mainMenu > ul.topMenu > li > a {
+	display:block;
+	height:40px;
+	color:#4F5D73;
+	text-decoration:none;
+	white-space:nowrap;
+	vertical-align:top;
+}
+
+nav.sideMenu {
+	font-family:Verdana, sans-serif;
+	background-color:#1B6495;
+}
+
+nav.sideMenu h2 {
+	display:none;
+}
+
+nav.sideMenu ul {
+	list-style:none;
+	padding:0;
+}
+
+nav.sideMenu > ul.topMenu {
+	margin:0;
+	display:flex;
+	flex-flow:column nowrap;
+	justify-content:flex-start;
+}
+
+nav.sideMenu > ul.topMenu li {
+	margin:0;
+}
+
+nav.sideMenu > ul.topMenu > li {
+	font-size:20px;
+	white-space:nowrap;
+	padding:40px 20px 20px 20px;
+	border-bottom:1px solid #CCC;
+	white-space:nowrap;
+}
+
+nav.sideMenu > ul.topMenu > li > a {
+	color:#EEE;
+	text-decoration:none;
+}
+
+nav.sideMenu ul.subMenu {
+	margin:10px 5px 0 0;
+}
+
+nav.sideMenu ul.subMenu li {
+	font-size:14px;
+	padding:10px 10px 5px 0;
+}
+
+nav.sideMenu ul.subMenu > li > a{
+	color:#EEE;
+	text-decoration:none;
+}
+
+a:hover {
+	color:#F00 !important;
+}
+
