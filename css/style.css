@@ -9,7 +9,6 @@ body {
 	background-color:#FFF;
 	font-size:1em;
 	color:#222;
-	max-width:950px;
 	margin:auto;
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
@@ -283,10 +282,6 @@ a:hover {
 a {
 	color:#00B;
 	text-decoration:none;
-}
-
-article {
-	max-width:700px;
 }
 
 p {
