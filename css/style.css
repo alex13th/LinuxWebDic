@@ -35,6 +35,7 @@ footer {
 
 main {
 	margin:10px 10px 30px 10px;
+	padding: 20px;
 	order:4;
 }
 
@@ -305,7 +306,8 @@ td.check {
 
 var {
 	font-style:italic;
-	color:#CC0000;
+	font-weight: bold;
+	color:#990000;
 }
 
 samp {
@@ -315,10 +317,37 @@ samp {
 	background-color: #EEE;
 }
 
-table td, th {
+th {
+	color: #36474F;
+	font-size: 1.1em;
+}
+td, th {
 	padding:5px 10px 5px 0;
 }
 
 table.valueTable th {
 	border-bottom:1px solid #333;
+}
+
+table.selectTable {
+	border-collapse: collapse;
+}
+
+table.selectTable td, table.selectTable th {
+	padding:5px 10px 5px 5px;
+	border-right:1px solid #333;
+	border-bottom:1px solid #333;
+}
+
+table.selectTable td:last-child, table.selectTable th:last-child {
+	border-right: 0;
+	border-bottom:1px solid #333;
+}
+
+table.tabTable td {
+	vertical-align: top;
+}
+
+h1, h2, h3, h4 {
+	color: #000077;
 }

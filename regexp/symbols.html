@@ -1,0 +1,677 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="../css/style.css"  type="text/css" rel="stylesheet">
+		<title>Справочник по основнам Linux - Администрирование</title>
+	</head>
+<body>
+
+	<body>
+		<div class="pageWrapper">
+			<header>
+				<nav class="mainMenu">
+					<ul class="topMenu">
+						<li class="activeMenu"><a href="../general/index.html">Основы</a></li>
+						<li><a href="../regexp/index.html">RegExp</a></li>
+						<li><a href="../virtualbox/index.html">VirtualBox</a></li>
+						<li><a href="../vagrant/index.html">Vagrant</a></li>
+						<li><a href="../ansible/index.html">Ansible</a></li>
+					</ul>
+				</nav>
+			</header>
+			<nav class="sideMenu">
+				<h2>Регулярные выражения</h2>
+				<ul class="topMenu">
+					<li><a href="metasymbols.html">Метасимволы</a></li>
+					<li><a href="dialects.html">Диалекты</a></li>
+					<li class="activeMenu"><a href="symbols.html">Представление символов</a></li>
+				</ul>
+			</nav>
+			<main>
+				<h1>Представления символов</h1>
+				<h2>Сокращенные обозначения классов</h2>
+				<table class="tabTable">
+					<tr>
+						<td class="value">\d</td>
+						<td class="desc"><var>Цифра</var>. Обычно эквивалентно [0-9] или в некоторых программах
+							с поддержкой Юникода – любым цифрам Юникода.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\D</td>
+						<td class="desc"><var>He!цифра</var>. Обычно эквивалентно [^\d].
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\w</td>
+						<td class="desc"><var>Символ, входящий в слово</var>. Часто эквивалентно [a-zA-Z0-9_], хотя одни
+							программы исключают символ подчеркивания, а другие дополняют его всеми алфавитно цифровыми символами
+							в соответствии с локальным контекстом. При поддержке Юникода \w обычно соответствует
+							любому алфавитно-цифровому символу (важное исключение: в пакете регулярных выражений java.util.regex
+							и в <abbr title="Perl Compatible Regular Expressions">PCRE</abbr>, расширении для <abbr title="PHP: Hypertext Preprocessor">PHP</abbr>, метасимвол \w интерпретируется в точности как [a-zA-Z0-9_]).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\W</td>
+						<td class="desc"><var>Символ, не входящий в слово</var>. Обычно эквивалентно [^\w].
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\s</td>
+						<td class="desc"><var>Пропуск</var>. В системах, ограничивающихся поддержкой <abbr title="American Standard Code for Information Interchange">ASCII</abbr>,
+							часто эквивалентно [•\f\n\r\t\v]. В системах с поддержкой Юникода также часто
+							включает управляющий символ «следующей строки» U+0085, а иногда
+							и свойство \p{Z}.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\S</td>
+						<td class="desc"><var>He!пропуск (обычно эквивалентно [^\s])</var>.
+						</td>
+					</tr>
+				</table>
+				<h2>Сокращенные обозначения символов</h2>
+				<table class="tabTable">
+					<tr>
+						<td class="value">\а</td>
+						<td class="desc"><var>Сигнал</var> (при «выводе» раздается звуковой сигнал). Обычно соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr>
+							символу &lt;BEL&gt;, код 007 (в восьмеричной системе).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\b</td>
+						<td class="desc"><var>Забой</var>. Обычно соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;BS&gt;, код 010
+							(в восьмеричной системе).	Обратите внимание: во многих диалектах \b интерпретируется как символ забоя
+							только внутри символьных классов, а за их пределами – как граница слова
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\e</td>
+						<td class="desc"><var>Символ Escape</var>. Обычно соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;ESC&gt;,
+							код 033 (в восьмеричной системе).</td>
+					</tr>
+					<tr>
+						<td class="value">\f</td>
+						<td class="desc"><var>Перевод формата</var>. Обычно соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;FF&gt;,
+							код 014 (в восьмеричной системе).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\n</td>
+						<td class="desc"><var>Новая строка</var>. На большинстве платформ (включая Unix и DOS/Windows)
+							обычно соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;LF&gt;, код 012 (в восьмеричной системе).
+							В системе MacOS обычно соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;CR&gt;, код 015 (в восьмеричной системе).
+							В Java и языках .NET всегда соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;LF&gt; независимо от платформы.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\r</td>
+						<td class="desc"><var>Возврат каретки</var>. Обычно соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;CR&gt;.
+							В системе MacOS обычно соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;LF&gt;.
+							В Java и языках .NET всегда соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;CR&gt; независимо от платформы.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\t</td>
+						<td class="desc"><var>Обычная (горизонтальная) табуляция</var>. Обычно соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;HT&gt;,
+							код 011 (в восьмеричной системе).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\v</td>
+						<td class="desc"><var>Вертикальная табуляция</var>. Обычно соответствует <abbr title="American Standard Code for Information Interchange">ASCII</abbr> символу &lt;VT&gt;,
+							код 013 (в восьмеричной системе).
+						</td>
+					</tr>
+				</table>
+
+				<h2>Сокращенные обозначения, поддерживаемые некоторыми программами</h2>
+				<table class="selectTable">
+					<thead>
+						<tr>
+							<th>Программа</th>
+							<th>\b (граница слова)</th>
+							<th>\b (забой)</th>
+							<th>\a (сигнал)</th>
+							<th>\e (<abbr title="American Standard Code for Information Interchange">ASCII</abbr>-символ Escape)</th>
+							<th>\f (перевод формата)</th>
+							<th>\n (новая строка)</th>
+							<th>\r (возврат каретки)</th>
+							<th>\t (табуляция)</th>
+							<th>\v (вертикальная табуляция)</th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="desc">Python</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;<sub>C</sub></td>
+						<td class="check">&#10004;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc">Tcl</td>
+						<td class="check">как \y</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc">Perl</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;<sub>C</sub></td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc">Java</td>
+						<td class="check">&#10004;<sub>X</sub></td>
+						<td class="check">&#10008;<sub>X</sub></td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;<sub>SR</sub></td>
+						<td class="check">&#10004;<sub>SR</sub></td>
+						<td class="check">&#10004;<sub>SR</sub></td>
+						<td class="check">&#10004;<sub>SR</sub></td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc"><abbr title="Рекурсивный акроним GNU's Not UNIX">GNU</abbr> awk</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc"><abbr title="Рекурсивный акроним GNU's Not UNIX">GNU</abbr> sed</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="desc"><abbr title="Рекурсивный акроним GNU's Not UNIX">GNU</abbr> Emacs</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10008;<sub>S</sub></td>
+						<td class="check">&#10008;<sub>S</sub></td>
+						<td class="check">&#10008;<sub>S</sub></td>
+						<td class="check">&#10008;<sub>S</sub></td>
+						<td class="check">&#10008;<sub>S</sub></td>
+						<td class="check">&#10008;<sub>S</sub></td>
+						<td class="check">&#10008;<sub>S</sub></td>
+						<td class="check">&#10008;<sub>S</sub></td>
+					</tr>
+					<tr>
+						<td class="desc">.NET</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;<sub>C</sub></td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc"><abbr title="PHP: Hypertext Preprocessor">PHP</abbr></td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;<sub>C</sub></td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="desc">MySQL</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="desc"><abbr title="Рекурсивный акроним GNU's Not UNIX">GNU</abbr> grep/egrep</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="desc">flex</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc">Ruby</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;<sub>C</sub></td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+				</table>
+				&#10004; – поддерживается;<br>
+				&#10004;<sub>C</sub> – поддерживается только в классах;<br>
+				&#10004;<sub>SR</sub> – поддерживается (также поддерживается строковыми литералами);<br>
+				&#10004;<sub>X</sub> – поддерживается (но в строковых литералах последовательность интерпретируется иначе);<br>
+				&#10008;<sub>X</sub> – не поддерживается (но в строковых литералах последовательность интерпретируется иначе);<br>
+				&#10008;<sub>S</sub> – не поддерживается (но поддерживается строковыми литералами).<br>
+
+				<h2>Восьмеричные коды: \число</h2>
+				<p>
+					Поддержка восьмеричных и шестнадцатеричных кодов в регулярных выражениях некоторых программ
+				</p>
+				<table class="selectTable">
+					<thead>
+						<tr>
+							<th>Программа</th>
+							<th>Обратные ссылки</th>
+							<th>Восьмеричные коды</th>
+							<th>Шестнадцатеричные коды</th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="value">Python</td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">\0, \07,\377</td>
+						<td class="desc">\xFF</td>
+					</tr>
+					<tr>
+						<td class="value">Tcl</td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">\0, \77, \777</td>
+						<td class="desc">\x… \uFFFF; \UFFFFFFFF</td>
+					</tr>
+					<tr>
+						<td class="value">Perl</td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">\0, \77, \777</td>
+						<td class="desc">\xF; \xFF; \x{…}</td>
+					</tr>
+					<tr>
+						<td class="value">Java</td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">\07, \077, \0377</td>
+						<td class="desc">\xFF; \uFFFF</td>
+					</tr>
+					<tr>
+						<td class="value"><abbr title="Рекурсивный акроним GNU's Not UNIX">GNU</abbr> awk</td>
+						<td class="desc">&nbsp;</td>
+						<td class="desc">\7, \77,\377</td>
+						<td class="desc">\x…</td>
+					</tr>
+					<tr>
+						<td class="value"><abbr title="Рекурсивный акроним GNU's Not UNIX">GNU</abbr> sed</td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">&nbsp;</td>
+						<td class="desc">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="value"><abbr title="Рекурсивный акроним GNU's Not UNIX">GNU</abbr> Emacs</td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">&nbsp;</td>
+						<td class="desc">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="value">.NET</td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">\0, \77,\377</td>
+						<td class="desc">\xFF, \uFFFF</td>
+					</tr>
+					<tr>
+						<td class="value"><abbr title="PHP: Hypertext Preprocessor">PHP</abbr></td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">\0, \77, \377</td>
+						<td class="desc">\xF, \xFF, \x{…}</td>
+					</tr>
+					<tr>
+						<td class="value">MySQL</td>
+						<td class="desc">&nbsp;</td>
+						<td class="desc">&nbsp;</td>
+						<td class="desc">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="value"><abbr title="Рекурсивный акроним GNU's Not UNIX">GNU</abbr> egrep</td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">&nbsp;</td>
+						<td class="desc">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="value"><abbr title="Рекурсивный акроним GNU's Not UNIX">GNU</abbr> grep</td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">&nbsp;</td>
+						<td class="desc">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="value">flex</td>
+						<td class="desc">&nbsp;</td>
+						<td class="desc">\7, \77,\377</td>
+						<td class="desc">\xF, \xFF</td>
+					</tr>
+					<tr>
+						<td class="value">Ruby</td>
+						<td class="desc">&#10004;</td>
+						<td class="desc">\7, \77,\377</td>
+						<td class="desc">\xF, \xFF</td>
+					</tr>
+				</table>
+				\0 – совпадает с нуль-байтом, но другие восьмеричные коды из одной цифры не поддерживаются;<br>
+				\7, \77 – поддерживаются восьмеричные коды из одной и двух цифр;<br>
+				\07 – поддерживаются восьмеричные коды из двух цифр, начинающиеся с 0;<br>
+				\077 – поддерживаются восьмеричные коды из трех цифр, начинающиеся с 0;<br>
+				\377 – поддерживаются восьмеричные коды из трех цифр до \377;<br>
+				\0377 – поддерживаются восьмеричные коды из четырех цифр до \0377;<br>
+				\777 – поддерживаются восьмеричные коды из трех цифр до \777;<br>
+				\х… – \х допускает любое количество цифр;<br>
+				\х{…} – \х{…} допускает любое количество цифр;<br>
+				\xF, \xFF – \х поддерживает шестнадцатеричные коды из одной и двух цифр;<br>
+				\uFFFF – \u поддерживает шестнадцатеричные последовательности из четырех цифр;<br>
+				\UFFFF – \U поддерживает шестнадцатеричные последовательности из четырех цифр;<br>
+				\UFFFFFFFF – \U<br>
+
+				<h2>Базовые свойства Юникода</h2>
+				<table class="selectTable">
+					<thead>
+						<tr>
+							<th>Класс</th>
+							<th>Синоним</th>
+							<th>Описание</th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="value">\p{L}</td>
+						<td class="value">\p{Letter}</td>
+						<td class="desc">Символы, считающиеся буквами
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{M}</td>
+						<td class="value">\p{Mark}</td>
+						<td class="desc">Различные символы, существующие не самостоятельно,
+							а лишь в сочетании с другими базовыми символами (диакритические знаки, рамки и т. д.)
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Z}</td>
+						<td class="value">\p{Separator}</td>
+						<td class="desc">Символы, выполняющие функции разделителей,
+							но не имеющие собственного визуального представления (разнообразные пробелы и т. д.)
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{S}</td>
+						<td class="value">\p{Symbol}</td>
+						<td class="desc">Различные декоративные элементы и знаки
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{N}</td>
+						<td class="value">\p{Number}</td>
+						<td class="desc">Цифры
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{P}</td>
+						<td class="value">\p{Punctuation}</td>
+						<td class="desc">Знаки препинания
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{C}</td>
+						<td class="value">\p{Other}</td>
+						<td class="desc">Прочие символы (редко используется при работе с обычным текстом)
+						</td>
+					</tr>
+				</table>
+
+				<h2>Базовые подсвойства Юникода</h2>
+				<table class="selectTable">
+					<thead>
+						<tr>
+							<th>Свойство</th>
+							<th>Синоним</th>
+							<th>Описание</th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="value">\p{Ll}</td>
+						<td class="value">\p{Lowercase_Letter}</td>
+						<td class="desc">Строчные буквы.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Lu}</td>
+						<td class="value">\p{Uppercase_Letter}</td>
+						<td class="desc">Прописные буквы.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Lt}</td>
+						<td class="value">\p{Titlecase_Letter}</td>
+						<td class="desc">Буквы, находящиеся в начале слова (например, символ Dž
+							в отличие от строчного символа dž и прописного символа DŽ).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{L&amp;}</td>
+						<td class="value">&nbsp;</td>
+						<td class="desc">Сокращенная запись для всех символов, обладающих свойствами \p{Ll}, \p{Lu} и \p{Lt}.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Lm}</td>
+						<td class="value">\p{Modifier_Letter}</td>
+						<td class="desc">Небольшое подмножество специальных символов, по внешнему виду схожих с буквами.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Lo}</td>
+						<td class="value">\p{Other_Letter}</td>
+						<td class="desc">Буквы, не имеющие регистра и не являющиеся модификаторами,
+							в том числе буквы иврита, бенгали, японского и тибетского языков и т. д.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Mn}</td>
+						<td class="value">\p{Non_Spacing_Mark}</td>
+						<td class="desc">«Символы», изменяющие другие символы (акценты, умляуты, признаки тональности и т. д.).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Mc}</td>
+						<td class="value">\p{Spacing_Combining_Mark}</td>
+						<td class="desc">Модификаторы, занимающие собственное место в тексте
+							(в основном обозначения гласных в тех языках, в которых они поддерживаются,
+							включая бенгальский, гуджарати, тамильский, телугу,
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Me}</td>
+						<td class="value">\p{Enclosing_Mark}</td>
+						<td class="desc">Небольшой набор знаков, внутри которых могут находиться
+							другие символы (круги, квадраты, ромбы и «буквицы»).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Zs}</td>
+						<td class="value">\p{Space_Separator}</td>
+						<td class="desc">Различные типы пробелов (обычный пробел, неразрывный пробел и пробелы фиксированной ширины).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Zl}</td>
+						<td class="value">\p{Line_Separator}</td>
+						<td class="desc">Символ LINE SEPARATOR (U+2028).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Zp}</td>
+						<td class="value">\p{Paragraph_Separator}</td>
+						<td class="desc">Символ PARAGRAPH SEPARATOR (U+2029).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Sm}</td>
+						<td class="value">\p{Math_Symbol}</td>
+						<td class="desc">+, ÷, /, , …
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Sc}</td>
+						<td class="value">\p{Currency_Symbol}</td>
+						<td class="desc">$, c| , ¥ , €, …
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Sk}</td>
+						<td class="value">\p{Modlfier_Symbol}</td>
+						<td class="desc">В основном разновидности комбинационных символов,
+							но также включает ряд самостоятельных символов.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{So}</td>
+						<td class="value">\p{Other_Symbol}</td>
+						<td class="desc">Различные декоративные символы, псевдографика, азбука Брайля и т. д.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Nd}</td>
+						<td class="value">\p{Decimal_Digit_Number}</td>
+						<td class="desc">Цифры от 0 до 9 в различных алфавитах (кроме китайского, японского и корейского).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Nl}</td>
+						<td class="value">\p{Letter_Number}</td>
+						<td class="desc">В основном римские цифры.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{No}</td>
+						<td class="value">\p{Other_Number}</td>
+						<td class="desc">Числа в верхних и нижних индексах, дроби; символы, представляющие числа,
+							которые не являются цифрами (кроме китайского, японского и корейского алфавитов).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Pd}</td>
+						<td class="value">\p{Dash_Punctuation}</td>
+						<td class="desc">Всевозможные дефисы и отрезки.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Ps}</td>
+						<td class="value">\p{Open_Punctuatlon}</td>
+						<td class="desc">Такие символы, как (, , , …
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Pe}</td>
+						<td class="value">\p{Close_Punctuation}</td>
+						<td class="desc">Такие символы, как ), , , …
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Pi}</td>
+						<td class="value">\p{Initial_Punctuation}</td>
+						<td class="desc">Такие символы, как «, “, <, …
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Pf}</td>
+						<td class="value">\p{Final_Punctuation}</td>
+						<td class="desc">Такие символы, как », ’, >, …
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Pc}</td>
+						<td class="value">\p{Connector_Punctuatlon}</td>
+						<td class="desc">Знаки препинания, имеющие особый лингвистический смысл (например, символ подчеркивания).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Po}</td>
+						<td class="value">\p{Other_Punctuation}</td>
+						<td class="desc">Остальные знаки препинания: !, &nbsp;, ·, :, ::, …
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Cc}</td>
+						<td class="value">\p{Control}</td>
+						<td class="desc">Управляющие символы
+							<abbr title="American Standard Code for Information Interchange">ASCII</abbr> и Latin1 (TAB, LF, CR...)
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Cf}</td>
+						<td class="value">\p{Format}</td>
+						<td class="desc">Неотображаемые символы, являющиеся признаками форматирования.
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Co}</td>
+						<td class="value">\p{Private_Use}</td>
+						<td class="desc">Кодовые пункты, предназначенные для закрытого использования (логотипы компаний и т. д.).
+						</td>
+					</tr>
+					<tr>
+						<td class="value">\p{Cn}</td>
+						<td class="value">\p{Unassigned}</td>
+						<td class="desc">Кодовые пункты, которым не присвоены символы.
+						</td>
+					</tr>
+				</table>
+			</main>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="../css/style.css"  type="text/css" rel="stylesheet">
+		<title>Справочник по основнам Linux - Администрирование</title>
+	</head>
+<body>
+
+	<body>
+		<div class="pageWrapper">
+			<header>
+				<nav class="mainMenu">
+					<ul class="topMenu">
+						<li><a href="../general/index.html">Основы</a></li>
+						<li class="activeMenu"><a href="../regexp/index.html">RegExp</a></li>
+						<li><a href="../virtualbox/index.html">VirtualBox</a></li>
+						<li><a href="../vagrant/index.html">Vagrant</a></li>
+						<li><a href="../ansible/index.html">Ansible</a></li>
+					</ul>
+				</nav>
+			</header>
+			<nav class="sideMenu">
+				<h2>Регулярные выражения</h2>
+				<ul class="topMenu">
+					<li><a href="metasymbols.html">Метасимволы</a></li>
+					<li class="activeMenu"><a href="dialects.html">Диалекты</a></li>
+					<li><a href="symbols.html">Представление символов</a></li>
+				</ul>
+			</nav>
+			<main>
+				<h1>Обзор диалектов</h1>
+				<h2>Диалекты <abbr title="Portable Operating System Interface">POSIX</abbr></h2>
+				<p>
+					<abbr title="Portable Operating System Interface">POSIX</abbr> делит распространенные диалекты на две категории: <abbr title="Basic Regular Expressions">BRE</abbr> (basic regular expressions,
+					т. е. «базовые регулярные выражения») и <abbr title="Extended Regular Expression">ERE</abbr> (extended regular expressions, т. е. «расширенные регулярные
+					выражения»)). <abbr title="Portable Operating System Interface">POSIX</abbr> совместимые программы поддерживают одну из этих категорий. Метасимволы двух категорий
+					<abbr title="Portable Operating System Interface">POSIX</abbr>.
+				</p>
+				<table class="selectTable">
+					<thead>
+						<tr>
+							<th>Метасимволы</th>
+							<th><abbr title="Basic Regular Expressions">BRE</abbr></th>
+							<th><abbr title="Extended Regular Expression">ERE</abbr></th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="desc">Точка, ^, $, […], [^…]</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc">Произвольное число</td>
+						<td class="check">*</td>
+						<td class="check">*</td>
+					</tr>
+					<tr>
+						<td class="desc">Квантификаторы + и ?</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">+ ?</td>
+					</tr>
+					<tr>
+						<td class="desc">Интервальный квантификатор</td>
+						<td class="check">\{min, max\}</td>
+						<td class="check">{min, max}</td>
+					</tr>
+					<tr>
+						<td class="desc">Группировка</td>
+						<td class="check">\(…\)</td>
+						<td class="check">(…)</td>
+					</tr>
+					<tr>
+						<td class="desc">Применение квантификаторов к скобкам</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc">Обратные ссылки</td>
+						<td class="check">от \1 до \9</td>
+						<td class="check">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="desc">Конструкция выбора</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+				</table>
+				<h2>Диалекты популярных программ</h2>
+				<table class="selectTable">
+					<thead>
+						<tr>
+							<th>Возможность</th>
+							<th>grep</th>
+							<th>egrep</th>
+							<th><abbr title="Рекурсивный акроним GNU's Not UNIX">GNU</abbr> Emacs</th>
+							<th>Tcl</th>
+							<th>Perl</th>
+							<th>.NET</th>
+							<th>Пакет для Java от Sun</th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="desc">+, ^, $, […]</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc">? + |</td>
+						<td class="check">\? \+ \|</td>
+						<td class="check">? + |</td>
+						<td class="check">? + \|</td>
+						<td class="check">? + |</td>
+						<td class="check">? + |</td>
+						<td class="check">? + |</td>
+						<td class="check">? + |</td>
+					</tr>
+					<tr>
+						<td class="desc">Группировка</td>
+						<td class="check">\(…\)</td>
+						<td class="check">(…)</td>
+						<td class="check">\(…\)</td>
+						<td class="check">(…)</td>
+						<td class="check">(…)</td>
+						<td class="check">(…)</td>
+						<td class="check">(…)</td>
+					</tr>
+					<tr>
+						<td class="desc">(?:…)</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc">Границы слов</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">\&lt; \&gt;</td>
+						<td class="check">\&lt; \&gt; \b, \B</td>
+						<td class="check">\m, \M, \y</td>
+						<td class="check">\b, \B</td>
+						<td class="check">\b, \B</td>
+						<td class="check">\b, \B</td>
+					</tr>
+					<tr>
+						<td class="desc">\w, \W</td>
+						<td class="check">&nbsp;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+					<tr>
+						<td class="desc">Обратные ссылки</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+						<td class="check">&#10004;</td>
+					</tr>
+				</table>
+				<h2>Завершители строк</h2>
+
+				<table class="selectTable">
+					<thead>
+						<tr>
+							<th>Символ</th>
+							<th>Код</th>
+							<th>Описание</th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="value">LF</td>
+						<td class="check">U+000A</td>
+						<td class="desc">Перевод строки (<abbr title="American Standard Code for Information Interchange">ASCII</abbr>)</td>
+					</tr>
+					<tr>
+						<td class="value">VT</td>
+						<td class="check">U+000B</td>
+						<td class="desc">Вертикальная табуляция (<abbr title="American Standard Code for Information Interchange">ASCII</abbr>)</td>
+					</tr>
+					<tr>
+						<td class="value">FF</td>
+						<td class="check">U+000C</td>
+						<td class="desc">Перевод формата (<abbr title="American Standard Code for Information Interchange">ASCII</abbr>)</td>
+					</tr>
+					<tr>
+						<td class="value">CR</td>
+						<td class="check">U+000D</td>
+						<td class="desc">Возврат каретки (<abbr title="American Standard Code for Information Interchange">ASCII</abbr>)</td>
+					</tr>
+					<tr>
+						<td class="value">CR/LF</td>
+						<td class="check">U+000D U+000A</td>
+						<td class="desc">Возврат каретки/перевод строки (<abbr title="American Standard Code for Information Interchange">ASCII</abbr> последовательность)</td>
+					</tr>
+					<tr>
+						<td class="value">NEL</td>
+						<td class="check">U+0085</td>
+						<td class="desc">Следующая строка (Юникод)</td>
+					</tr>
+					<tr>
+						<td class="value">LS</td>
+						<td class="check">U+2028</td>
+						<td class="desc">Разделитель строк (Юникод)</td>
+					</tr>
+					<tr>
+						<td class="value">PS</td>
+						<td class="check">U+2029</td>
+						<td class="desc">Разделитель абзацев (Юникод)</td>
+					</tr>
+				</table>
+			</main>
+		</div>
+	</body>
+</html>
