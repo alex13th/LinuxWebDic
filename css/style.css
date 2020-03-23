@@ -1,16 +1,20 @@
 body {
 	margin:0;
 	padding:0 0 10px 0;
+	font-size:1em;
+	color:#444;
+}
+
+a {
+	text-decoration:none;
+	color:#444;
 }
 
 .pageWrapper {
 	display: flex;
 	flex-flow:row wrap;
 	background-color:#FFF;
-	font-size:1em;
-	color:#222;
 	margin:auto;
-	box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 header, nav.mainMenu, nav.sideMenu, footer {
@@ -20,13 +24,13 @@ header, nav.mainMenu, nav.sideMenu, footer {
 }
 
 header {
-	font:1.2em Verdana, sans-serif;
+	font:1.4em Verdana, sans-serif;
 	margin:0;
 	padding:20px;
-	background-color:#FEDB75;
+	background-color:#FFF;
 	order:1;
 	z-index:10;
-	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.5);
+	border-bottom: 1px solid #999;
 }
 
 footer {
@@ -54,7 +58,6 @@ nav.mainMenu > ul.topMenu {
 		background-color:#EEE;
 		flex-grow:1;
 		flex-basis:100px;
-		border-right:1px solid #CCC;
 		order:3;
 		min-width:255px;
 	}
@@ -68,7 +71,6 @@ main > section {
 }
 
 main > section > h2 {
-	color:#333;
 	width:100%;
 	background-color:#FFF;
 	padding:20px 10px 10px 30px;
@@ -84,7 +86,7 @@ section > article {
 	flex-basis:200px;
 	flex-grow:1;
 	border-radius:5px;
-	min-width:300px;
+	/* width:300px; */
 }
 
 section > article > h3 {
@@ -183,17 +185,21 @@ nav.mainMenu > ul.topMenu > li {
 	padding:0 10px;
 }
 
+nav.mainMenu > ul.topMenu > li.activeMenu > a {
+	color: #22749b;
+}
+
 nav.mainMenu > ul.topMenu > li > a {
 	display:block;
 	height:40px;
-	color:#4F5D73;
 	text-decoration:none;
 	white-space:nowrap;
 }
 
 nav.sideMenu {
 	font-family:Verdana, sans-serif;
-	background-color:#36474F;
+	background-color:#FFF;
+	margin: 0 32px;
 }
 
 nav.sideMenu h2 {
@@ -222,26 +228,20 @@ nav.sideMenu ul.topMenu li.activeMenu ul.subMenu {
 	margin:0;
 }
 
-nav.sideMenu ul.subMenu li.activeMenu:before {
-	content: "-> ";
-	color:#E1BF00;
-}
-
 nav.sideMenu > ul.topMenu > li {
 	font-size:1em;
+	font-weight:bold;
 	white-space:nowrap;
 	padding:20px 10px 10px 10px;
-	border-bottom:1px solid #CCC;
 	white-space:nowrap;
 }
 
 nav.sideMenu > ul.topMenu > li > a {
-	color:#EEE;
 	text-decoration:none;
 }
 
 nav.sideMenu > ul.topMenu li.activeMenu > a {
-	color:#E1BF00;
+	color:#22749b;
 	text-decoration:none;
 }
 
@@ -252,17 +252,16 @@ nav.sideMenu ul.subMenu {
 
 nav.sideMenu ul.subMenu li {
 	font-size:0.8em;
-	padding:10px 10px 5px 0;
+	padding:10px 10px 5px 20px;
 }
 
 nav.sideMenu ul.subMenu > li > a{
-	color:#EEE;
 	text-decoration:none;
 }
 
 nav.mainMenu > ul.topMenu {
 	flex-flow:row wrap;
-	justify-content:center;
+	justify-content:left;
 	align-items:center;
 	margin:0;
 	padding:0;
@@ -276,18 +275,12 @@ article > ul > li {
 }
 
 article > ul > li > a {
-	color:#333;
 	text-decoration:none;
 	white-space:nowrap;
 }
 
 a:hover {
 	color:#F00 !important;
-}
-
-a {
-	color:#00B;
-	text-decoration:none;
 }
 
 p {
@@ -354,5 +347,5 @@ table.tabTable td {
 }
 
 h1, h2, h3, h4 {
-	color: #000077;
+	/* color: #000077; */
 }
