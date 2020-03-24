@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="../../css/style.css"  type="text/css" rel="stylesheet">
+		<title>Справочник по основнам Linux - Администрирование</title>
+	</head>
+	<body>
+		<div class="pageWrapper">
+			<header>
+				<nav class="mainMenu">
+					<ul class="topMenu">
+						<li><a href="../../index.html">Home</a></li>
+						<li class="activeMenu"><a href="../../linux/index.html">Linux</a></li>
+						<li><a href="../../regexp/index.html">RegExp</a></li>
+						<li><a href="../../virtualbox/index.html">VirtualBox</a></li>
+						<li><a href="../../vagrant/index.html">Vagrant</a></li>
+						<li><a href="../../ansible/index.html">Ansible</a></li>
+					</ul>
+				</nav>
+			</header>
+			<nav class="sideMenu">
+				<h2>Основы</h2>
+				<ul class="topMenu">
+					<li id="admin" class="activeMenu"><a href="../admin/index.html">Администрирование</a>
+						<ul class="subMenu">
+							<li><a href="demons.html">Работа с демонами</a></li>
+							<li><a href="crontab.html">Столбцы crontab</a></li>
+							<li><a href="ftp-cmd.html">Команды <abbr title="File Transfer Protocol">FTP</abbr></a></li>
+							<li><a href="tools.html">Инструменты</a></li>
+							<li><a href="users-cmd.html">Пользователи/групы</a></li>
+							<li class="activeMenu"><a href="shadow.html">Файл shadow</a></li>
+							<li><a href="pam.html"><abbr title="Pluggable Authentication Modules">PAM</abbr></a></li>
+							<li><a href="nss.html"><abbr title="Network Security Services">NSS</abbr></a></li>
+							<li><a href="rpm.html">Использование <abbr title="RPM Package Manager (RPM)">RPM</abbr></a></li>
+							<li><a href="ipv6.html"><abbr title=" Internet Protocol version 6">IPv6</abbr> и Linux</a></li>
+						</ul>
+					</li>
+					<li id="hotkeys"><a href="../hotkeys/index.html">Сочетания клавиш</a>
+					</li>
+					<li id="bash"><a href="../bash/index.html">Bash</a>
+					</li>
+					<li id="fs"><a href="../fs/index.html">Файловая система</a>
+					</li>
+					<li id="kernel"><a href="../kernel/index.html">Ядро</a>
+					</li>
+				</ul>
+			</nav>
+			<main>
+				<article>
+				<h1>Формат файла shadow</h1>
+				<p>
+					Чтобы осложнить жизнь потенциальным агрессорам, в новых системах Linux зашифрованные
+					коды-пароли сохраняются не прямо в /etc/passwd, а в отдельном файле /etc/shadow.
+					Преимущество заключается в том, что этот файл может читать только администратор.
+					(Файлы /etc/passwd и /etc/group должны быть доступны для чтения всем пользователям системы,
+					так как содержат элементарную информацию по управлению системой. А к файлу /etc/shadow могут
+					иметь доступ только программы для верификации и изменения паролей. Поэтому потенциальный
+					агрессор должен сначала получить доступ администратора и только потом сможет прочитать
+					зашифрованные коды-пароли.)
+				</p>
+				<p>
+					Формат файла shadow должен быть следующим:
+					Логин:<samp>Код-пароль:d1:d2:d3:d4:d5:d6:reserved</samp>
+				</p>
+				<p>
+					Далее приведен фрагмент файла:
+				</p>
+				<samp>
+					root:$6$Ecrkix...:14391:0:99999:7:::<br>
+					daemon:*:14391:0:99999:7:::<br>
+					bin:*:14391:0:99999:7:::<br>
+					...<br>
+					kofler:$6$TZR7...:14391:0:99999:7:::<br>
+				</samp>
+
+				<h2>Поля d1-d6</h2>
+
+				<ul>
+					<li>d1 указывает, когда пароль был в последний раз изменен (данные указываются в днях, прошедших с 01.01.1970);</li>
+					<li>d2 определяет, через сколько дней можно изменить пароль;</li>
+					<li>d3 указывает, через сколько дней пароль обязательно необходимо изменить, прежде чем он станет недействителен (подробности об этих полях сообщаются в файле справки man 5 shadow);</li>
+					<li>d4 определяет, за сколько дней до истечения срока действия пароля пользователь начнет получать об этом предупреждения;</li>
+					<li>d5 указывает, через сколько дней просроченная учетная запись без действующего пароля будет полностью деактивирована;</li>
+					<li>d6 задает, когда именно учетная запись будет деактивирована.</li>
+				</ul>
+			</main>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="../../css/style.css"  type="text/css" rel="stylesheet">
+		<title>Справочник по основнам Linux - Администрирование</title>
+	</head>
+	<body>
+		<div class="pageWrapper">
+			<header>
+				<nav class="mainMenu">
+					<ul class="topMenu">
+						<li><a href="../../index.html">Home</a></li>
+						<li class="activeMenu"><a href="../../linux/index.html">Linux</a></li>
+						<li><a href="../../regexp/index.html">RegExp</a></li>
+						<li><a href="../../virtualbox/index.html">VirtualBox</a></li>
+						<li><a href="../../vagrant/index.html">Vagrant</a></li>
+						<li><a href="../../ansible/index.html">Ansible</a></li>
+					</ul>
+				</nav>
+			</header>
+			<nav class="sideMenu">
+				<h2>Основы</h2>
+				<ul class="topMenu">
+					<li id="admin" class="activeMenu"><a href="../admin/index.html">Администрирование</a>
+						<ul class="subMenu">
+							<li class="activeMenu"><a href="demons.html">Работа с демонами</a></li>
+							<li><a href="crontab.html">Столбцы crontab</a></li>
+							<li><a href="ftp-cmd.html">Команды <abbr title="File Transfer Protocol">FTP</abbr></a></li>
+							<li><a href="tools.html">Инструменты</a></li>
+							<li><a href="users-cmd.html">Пользователи/групы</a></li>
+							<li><a href="shadow.html">Файл shadow</a></li>
+							<li><a href="pam.html"><abbr title="Pluggable Authentication Modules">PAM</abbr></a></li>
+							<li><a href="nss.html"><abbr title="Network Security Services">NSS</abbr></a></li>
+							<li><a href="rpm.html">Использование <abbr title="RPM Package Manager (RPM)">RPM</abbr></a></li>
+							<li><a href="ipv6.html"><abbr title=" Internet Protocol version 6">IPv6</abbr> и Linux</a></li>
+						</ul>
+					</li>
+					<li id="hotkeys"><a href="../hotkeys/index.html">Сочетания клавиш</a>
+					</li>
+					<li id="bash"><a href="../bash/index.html">Bash</a>
+					</li>
+					<li id="fs"><a href="../fs/index.html">Файловая система</a>
+					</li>
+					<li id="kernel"><a href="../kernel/index.html">Ядро</a>
+					</li>
+				</ul>
+			</nav>
+			<main>
+				<h1>Запуск и завершение работы демонов</h1>
+				<h2>Запуск вручную</h2>
+				<table class="tabTable"><var>
+					<tr>
+						<td class="value">service <var>имя</var> start</td>
+						<td class="desc">(Функционирует почти во всех дистрибутивах)</td>
+					</tr>
+					<tr>
+						<td class="value">/etc/init.d/<var>имя</var> start</td>
+						<td class="desc">(Процессы Init-V)</td>
+					</tr>
+					<tr>
+						<td class="value">invoke-rc.d <var>имя</var> start</td>
+						<td class="desc">(Работает c Init-V в Debian)</td>
+					</tr>
+					<tr>
+						<td class="value">rc <var>имя</var> start</td>
+						<td class="desc">(Работает c Init-V в SUSE)</td>
+					</tr>
+					<tr>
+						<td class="value">start <var>имя</span></td>
+						<td class="desc">(Upstart, например в Ubuntu)</td>
+					</tr>
+					<tr>
+						<td class="value">start <var>имя</span></td>
+						<td class="desc">(Upstart, например в Ubuntu)</td>
+					</tr>
+					<tr>
+						<td class="value">systemctl start <var>имя</span>.service</td>
+						<td class="desc">(Systemd, например в Fedora и openSUSE)</td>
+					</tr>
+				</table>
+				<h2>Остановка вручную</h2>
+				<table class="tabTable">
+					<tr>
+						<td class="value">service <var>имя</var> stop</td>
+						<td class="desc">(Почти во всех современных дистрибутивах)</td>
+					</tr>
+					<tr>
+						<td class="value">/etc/init.d/<span class="subst">имя</var> stop</td>
+						<td class="desc">(Процессы Init-V)</td>
+					</tr>
+					<tr>
+						<td class="value">invoke-rc.d <var>имя</var> stop</td>
+						<td class="desc">(Работает c Init-V в Debian)</td>
+					</tr>
+					<tr>
+						<td class="value">rc<var>имя</var> stop</td>
+						<td class="desc">(Работает c Init-V в SUSE)</td>
+					</tr>
+					<tr>
+						<td class="value">stop <var>имя</span></td>
+						<td class="desc">(Upstart)</td>
+					</tr>
+					<tr>
+						<td class="value">systemctl stop <var>имя</span>.service </td>
+						<td class="desc">(Systemd)</td>
+					</tr>
+				</table>
+				<h2>Перезагрузка/перезапуск</h2>
+				<table class="tabTable">
+					<tr>
+						<td class="value">service <var>имя</var> reload/restart</td>
+						<td class="desc">(Почти во всех современных дистрибутивах)</td>
+					</tr>
+					<tr>
+						<td class="value">/etc/init.d/<span class="subst">имя</var> reload/restart</td>
+						<td class="desc">(Процессы Init-V)</td>
+					</tr>
+					<tr>
+						<td class="value">invoke-rc.d <var>имя</var> reload/restart</td>
+						<td class="desc">(Работает с Init-V в Debian)</td>
+					</tr>
+					<tr>
+						<td class="value">rc<var>имя</var> reload/restart</td>
+						<td class="desc">(Работает с Init-V в SUSE)</td>
+					</tr>
+					<tr>
+						<td class="value">reload/restart <var>имя</span></td>
+						<td class="desc">(Upstart)</td>
+					</tr>
+					<tr>
+						<td class="value">systemctl reload <var>имя</span>.service</td>
+						<td class="desc">(Systemd)</td>
+					</tr>
+				</table>
+				<h2>Автоматический старт при запуске компьютера</h2>
+				<table class="tabTable">
+					<tr>
+						<td class="value">insserv <var>имя</span></td>
+						<td class="desc">(Специфично для Init-V в Debian и SUSE)</td>
+					</tr>
+					<tr>
+						<td class="value">chkconfig --add <var>имя</span></td>
+						<td class="desc">(Специфично для Init-V в Red Hat)</td>
+					</tr>
+					<tr>
+						<td class="value">chkconfig --level 35 <var>имя</var> on</td>
+						<td class="desc">(Специфично для Init-V в Red Hat)</td>
+					</tr>
+					<tr>
+						<td class="value">systemctl enable <var>имя</span>.service</td>
+						<td class="desc">(Systemd)</td>
+					</tr>
+				</table>
+				<h2>Предотвращение автоматического запуска</h2>
+				<table class="tabTable">
+					<tr>
+						<td class="value">insserv -r <var>имя</span></td>
+						<td class="desc">(Специфично для Init-V в Debian и SUSE)</td>
+					</tr>
+					<tr>
+						<td class="value">chkconfig --del <var>имя</span></td>
+						<td class="desc">(Специфично для Init-V в Red Hat)</td>
+					</tr>
+					<tr>
+						<td class="value">systemctl disable <var>имя</span>.service</td>
+						<td class="desc">(Systemd)</td>
+					</tr>
+				</table>
+			</main>
+		</div>
+	</body>
+</html>
