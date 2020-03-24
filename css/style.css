@@ -15,6 +15,7 @@ a {
 	flex-flow:row wrap;
 	background-color:#FFF;
 	margin:auto;
+<<<<<<< HEAD
 }
 
 header, nav.mainMenu, nav.sideMenu, footer {
@@ -24,6 +25,13 @@ header, nav.mainMenu, nav.sideMenu, footer {
 }
 
 header {
+=======
+	justify-content: flex-start;
+}
+
+header {
+	flex-basis: 100%;
+>>>>>>> 96cdbad2a180e8f9e91883f9cead0d62d12fee2a
 	font:1.4em Verdana, sans-serif;
 	margin:0;
 	padding:20px;
@@ -41,12 +49,14 @@ main {
 	margin:10px 10px 30px 10px;
 	padding: 20px;
 	order:4;
+	max-width: 1000px;
 }
 
 nav.mainMenu > ul.topMenu {
 	display:flex;
 }
 
+<<<<<<< HEAD
 /*--- @media all and (min-width: 750px) {*/
 	main {
 		flex-grow:4;
@@ -63,6 +73,16 @@ nav.mainMenu > ul.topMenu {
 	}
 /*}
 */
+=======
+nav.sideMenu {
+	display:block;
+	flex-grow:1;
+	flex-basis:100px;
+	order:3;
+	max-width:255px;
+	min-width:255px;
+}
+>>>>>>> 96cdbad2a180e8f9e91883f9cead0d62d12fee2a
 
 main > section {
 	display:flex;
