@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href="../css/style.css"  type="text/css" rel="stylesheet">
+	<title>Справочник по Linux - Сочетания клавиш</title>
+</head>
+<body>
+	<header>
+		<nav class="mainMenu">
+			<ul class="topMenu">
+				<li><a href="../index.html">Home</a></li>
+				<li class="activeMenu"><a href="index.html">Linux</a></li>
+				<li><a href="../regexp/index.html">RegExp</a></li>
+				<li><a href="../virtualbox/index.html">VirtualBox</a></li>
+				<li><a href="../vagrant/index.html">Vagrant</a></li>
+				<li><a href="../ansible/index.html">Ansible</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<nav class="sideMenu">
+			<h2>Сочетания клавиш</h2>
+			<ul>
+				<li><a href="#less">Less</a></li>
+				<li><a href="#vi">Vi</a></li>
+				<li><a href="#Joe">Joe (Jmacs или Jpico)</a></li>
+				<li><a href="#info">Info</a></li>
+				<li><a href="#bash">Bash (emac)</a></li>
+			</ul>
+		</nav>
+		<section class="announcement">
+			<article id="less">
+				<h1>Клавиши и их сочетания для работы с командой less</h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Сочетание клавиш</th>
+						<th>Функция</th>
+					</tr>
+					<tr>
+						<td class="value">Клавиши управления курсором</td>
+						<td class="desc">Перемещение текст вверх или вниз</td>
+					</tr>
+					<tr>
+						<td class="value">Home, End</td>
+						<td class="desc">Переход к началу/концу текста</td>
+					</tr>
+					<tr>
+						<td class="value">G, Shift+G</td>
+						<td class="desc">Переход к началу/концу текста</td>
+					</tr>
+					<tr>
+						<td class="value">/ образец Enter </td>
+						<td class="desc">Поиск по направлению вперед</td>
+					</tr>
+					<tr>
+						<td class="value">? образец Enter </td>
+						<td class="desc">Поиск по направлению назад</td>
+					</tr>
+					<tr>
+						<td class="value">N</td>
+						<td class="desc">Повтор поиска вперед (next)</td>
+					</tr>
+					<tr>
+						<td class="value">Shift+N</td>
+						<td class="desc">Повтор поиска назад</td>
+					</tr>
+					<tr>
+						<td class="value">Q</td>
+						<td class="desc">Завершение (выход)</td>
+					</tr>
+					<tr>
+						<td class="value">H</td>
+						<td class="desc">Отображение текста справки с другими обозначениями клавиш</td>
+					</tr>
+				</table>
+			</article>
+			<article id="#vi">
+				<h1>Сочетания клавиш для работы с Vi</h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Сочетание клавиш</th>
+						<th>Функция</th>
+					</tr>
+					<tr>
+						<td class="value">I</td>
+						<td class="desc">Переход в режим вставки</td>
+					</tr>
+					<tr>
+						<td class="value">Esc</td>
+						<td class="desc">Выход из режима вставки</td>
+					</tr>
+					<tr>
+						<td class="value">H/L</td>
+						<td class="desc">Движение курсора вправо/влево — функция работает и при использовании соответствующих клавиш управления курсором</td>
+					</tr>
+					<tr>
+						<td class="value">J/K</td>
+						<td class="desc">Движение курсора вверх и вниз</td>
+					</tr>
+					<tr>
+						<td class="value">X</td>
+						<td class="desc">Удаление символа</td>
+					</tr>
+					<tr>
+						<td class="value">D+D</td>
+						<td class="desc">Удаление данной строк</td>
+					</tr>
+					<tr>
+						<td class="value">P</td>
+						<td class="desc">Вставка удаленной строки на позиции курсора</td>
+					</tr>
+					<tr>
+						<td class="value">U</td>
+						<td class="desc">Общая отмена</td>
+					</tr>
+					<tr>
+						<td class="value">:</td>
+						<td class="desc">Переход в режим complex command</td>
+					</tr>
+				</table>
+				<p class="note">* - Если вы хотите работать с другим редактором, нужно изменить переменные окружения EDITOR и VISUAL в etc/profile или ~/.profile.</p>
+				<p># Внесение дополнения в /etc/profile или ~/.profile<br>
+					Export EDITOR=/usr/bin/jmacs<br>
+					Export VISUAL=$EDITOR
+				</p>
+				<h2>Сочетания клавиш для работы в режиме complex comman</h2>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Сочетание клавиш</th>
+						<th>Функция</th>
+					</tr>
+					<tr>
+						<td class="value">:w <span class="subst">имя</span></td>
+						<td class="desc">Сохранение текста под новым именем</td>
+					</tr>
+					<tr>
+						<td class="value">:wq</td>
+						<td class="desc">Сохранение результатов работы и выключение редактора Vi</td>
+					</tr>
+					<tr>
+						<td class="value">:q!</td>
+						<td class="desc">Выключение редактора Vi без сохранения информации</td>
+					</tr>
+					<tr>
+						<td class="value">:help</td>
+						<td class="desc">Вызов онлайн-справки</td>
+					</tr>
+				</table>
+			</article>
+			<article id="#Joe">
+				<h1>Сочетания клавиш для работы с Joe (Jmacs или Jpico)</h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Сочетание клавиш</th>
+						<th>Функция</th>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+K, H</td>
+						<td class="desc">Открытие/закрытие окна справки</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+K, Е</td>
+						<td class="desc">Загрузка нового файла</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+K, D</td>
+						<td class="desc">Сохранение файла (возможно сохранение под новым именем)</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+Y</td>
+						<td class="desc">Удаление строки</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+Shift+–</td>
+						<td class="desc">Отмена удаления</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+C</td>
+						<td class="desc">Завершение работы Joe (с запросом о необходимости сохранения инJoe (с запросом о необходимости сохранения ин (с запросом о необходимости сохранения информации)</td>
+					</tr>
+				</table>
+			</article>
+			<article id="#info">
+				<h1>Сочетания клавиш для работы с info</h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Сочетание клавиш</th>
+						<th>Функция</th>
+					</tr>
+					<tr>
+						<td class="value">Пробел</td>
+						<td class="desc">Прокрутка текста по направлению вниз</td>
+					</tr>
+					<tr>
+						<td class="value">Backspace</td>
+						<td class="desc">Прокрутка текста по направлению вверх</td>
+					</tr>
+					<tr>
+						<td class="value">B, E</td>
+						<td class="desc">Переход к началу или концу данного раздела справки</td>
+					</tr>
+					<tr>
+						<td class="value">Tab</td>
+						<td class="desc">Переход к следующей перекрестной ссылке</td>
+					</tr>
+					<tr>
+						<td class="value">Enter</td>
+						<td class="desc">Переход к другой части справочной информации</td>
+					</tr>
+					<tr>
+						<td class="value">N</td>
+						<td class="desc">Переход к следующей части справки на том же уровне иерархии</td>
+					</tr>
+					<tr>
+						<td class="value">P</td>
+						<td class="desc">Переход к предыдущей части справки на том же уровне иерархии</td>
+					</tr>
+					<tr>
+						<td class="value">U</td>
+						<td class="desc">Переход на один уровень иерархии выше</td>
+					</tr>
+					<tr>
+						<td class="value">L</td>
+						<td class="desc">Возврат к последнему показанному фрагменту текста</td>
+					</tr>
+					<tr>
+						<td class="value">H</td>
+						<td class="desc">Подробное практическое руководство</td>
+					</tr>
+					<tr>
+						<td class="value">?</td>
+						<td class="desc">Обзор команд</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+O</td>
+						<td class="desc">Закрытие текущего подокна</td>
+					</tr>
+					<tr>
+						<td class="value">Q</td>
+						<td class="desc">Завершение работы справки info</td>
+					</tr>
+				</table>
+			</article>
+			<article id="#bash">
+				<h1>Сочетания клавиш для работы с bash (emac)</h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Сочетание клавиш</th>
+						<th>Функция</th>
+					</tr>
+					<tr>
+						<td class="value">Home, End</td>
+						<td class="desc">Переместить курсор в начало или в конец строки</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+A, Ctrl+F</td>
+						<td class="desc">Переместить курсор в начало или в конец строки (используется, если Pos1 и End не работают)</td>
+					</tr>
+					<tr>
+						<td class="value">Alt+B, Alt+F</td>
+						<td class="desc">Переместить курсор на одно слово вперед или назад</td>
+					</tr>
+					<tr>
+						<td class="value">Backspace, Delete</td>
+						<td class="desc">Удалить символы вперед или назад</td>
+					</tr>
+					<tr>
+						<td class="value">Alt+D</td>
+						<td class="desc">Удалить слово</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+K</td>
+						<td class="desc">Удалить текст до конца строки</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+Y</td>
+						<td class="desc">Заново вставить последний удаленный текст</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+T</td>
+						<td class="desc">Поменять местами две предыдущих строки</td>
+					</tr>
+					<tr>
+						<td class="value">Alt+T</td>
+						<td class="desc">Поменять местами два предыдущих слова</td>
+					</tr>
+					<tr>
+						<td class="value">Tab</td>
+						<td class="desc">Дополнить названия команд и файлов</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+I</td>
+						<td class="desc">Погасить экран</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+R</td>
+						<td class="desc">Найти ранее введенные команды</td>
+					</tr>
+					<tr>
+						<td class="value">Alt+« .»</td>
+						<td class="desc">Вставить последний примененный параметр</td>
+					</tr>
+					<tr>
+						<td class="value">Ctrl+_</td>
+						<td class="desc">Отменить последнее изменение (Undo)</td>
+					</tr>
+				</table>
+			</article>
+		</section>
+	</main>
+</body>
+</html>

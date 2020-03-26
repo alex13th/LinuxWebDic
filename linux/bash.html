@@ -1,0 +1,552 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href="../css/style.css"  type="text/css" rel="stylesheet">
+	<title>Справочник по основнам Linux - Bash</title>
+</head>
+<body>
+	<header>
+			<nav class="mainMenu">
+				<ul class="topMenu">
+					<li><a href="../index.html">Home</a></li>
+					<li class="activeMenu"><a href="../linux/index.html">Linux</a></li>
+					<li><a href="../regexp/index.html">RegExp</a></li>
+					<li><a href="../virtualbox/index.html">VirtualBox</a></li>
+					<li><a href="../vagrant/index.html">Vagrant</a></li>
+					<li><a href="../ansible/index.html">Ansible</a></li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<nav class="sideMenu">
+				<h2>Bash</h2>
+				<ul>
+					<li><a href="#io-redirect">Переадресация ввода/вывода</a></li>
+					<li><a href="#substitution">Механизмы подстановки</a></li>
+					<li><a href="#env-var">Важнейшие  переменные</a></li>
+					<li><a href="#vars">$-переменные</a></li>
+					<li><a href="#param-subst">Подстановка параметров</a></li>
+					<li><a href="#test">Условия test</a></li>
+					<li><a href="#symbols">Спец. символы в bash</a></li>
+				</ul>
+			</nav>
+			<section>
+				<article id="io-redirect">
+					<h1>Переадресация ввода и вывода</h1>
+					<table class="valueTable">
+						<tr class="header">
+							<th class="value">Команда</th>
+							<th>Функция</th>
+						</tr>
+						<tr>
+							<td class="value">Команда &gt; файл</td>
+							<td class="desc">Переводит стандартный вывод в указанный файл</td>
+						</tr>
+						<tr>
+							<td class="value">Команда &lt; файл</td>
+							<td class="desc">Считывает ввод из указанного файла</td>
+						</tr>
+						<tr>
+							<td class="value">Команда 2&gt; файл</td>
+							<td class="desc">Переводит сообщения об ошибках в указанный файл</td>
+						</tr>
+						<tr>
+							<td class="value">Команда &gt;&amp; файл</td>
+							<td class="desc">Переадресовывает вывод  и ошибки</td>
+						</tr>
+						<tr>
+							<td class="value">Команда &amp;&gt; файл</td>
+							<td class="desc">Переадресовывает вывод  и ошибки</td>
+						</tr>
+						<tr>
+							<td class="value">Команда &gt;&gt; файл</td>
+							<td class="desc">Дописывает стандартный вывод в конце имеющегося файла</td>
+						</tr>
+						<tr>
+							<td class="value">Команда &amp;&gt;&gt; файл</td>
+							<td class="desc">Дописывает стандартный вывод и ошибки в конце имеющегося файла (начиная с версии bash 4.0)</td>
+						</tr>
+						<tr>
+							<td class="value">Команда1 | Команда2</td>
+							<td class="desc">Передает вывод команды1 команде2</td>
+						</tr>
+						<tr>
+							<td class="value">Команда | tee файл</td>
+							<td class="desc">Показывает вывод и одновременно сохраняет копию файла</td>
+						</tr>
+					</table>
+				</article>
+				<article id="substitution">
+					<h1>Механизмы подстановки</h1>
+					<table class="valueTable">
+						<tr class="header">
+							<th class="value">Команда</th>
+							<th>Функция</th>
+						</tr>
+						<tr>
+							<td class="value">?</td>
+							<td class="desc">Любой символ</td>
+						</tr>
+						<tr>
+							<td class="value">*</td>
+							<td class="desc">Любое количество любых символов (в том числе ни одного), но не *-файлы!</td>
+						</tr>
+						<tr>
+							<td class="value">**</td>
+							<td class="desc">Любые файлы и каталоги, в том числе из всех подкаталогов (начиная с версии bash 4.0 — shopt -s globstar)</td>
+						</tr>
+						<tr>
+							<td class="value">[abc]</td>
+							<td class="desc">Один из символов, указанных в скобках</td>
+						</tr>
+						<tr>
+							<td class="value">[a–f]</td>
+							<td class="desc">Символ из указанного диапазона</td>
+						</tr>
+						<tr>
+							<td class="value">[!abc]</td>
+							<td class="desc">Аналогично предыдущем</td>
+						</tr>
+						<tr>
+							<td class="value">~</td>
+							<td class="desc">Сокращенное обозначение домашнего каталога</td>
+						</tr>
+						<tr>
+							<td class="value">.</td>
+							<td class="desc">Текущий каталог</td>
+						</tr>
+						<tr>
+							<td class="value">..</td>
+							<td class="desc">Каталог на один уровень выше</td>
+						</tr>
+						<tr>
+							<td class="value">ab{1,2,3}</td>
+							<td class="desc">Возврат ab1 ab2 ab3</td>
+						</tr>
+						<tr>
+							<td class="value">a{1..4}</td>
+							<td class="desc">Возврат a1 a2 a3 a4</td>
+						</tr>
+						<tr>
+							<td class="value">$ [3*4]</td>
+							<td class="desc">Арифметические вычисления</td>
+						</tr>
+						<tr>
+							<td class="value">`команда`</td>
+							<td class="desc">Замена команды результатом ее выполнения</td>
+						</tr>
+						<tr>
+							<td class="value">$(команда)</td>
+							<td class="desc">Вариант, аналогичный предыдущему</td>
+						</tr>
+						<tr>
+							<td class="value">Команда "символ"</td>
+							<td class="desc">Отмена интерпретацию любых специальных символов, кроме $</td>
+						</tr>
+						<tr>
+							<td class="value">Команда 'символ'</td>
+							<td class="desc">Похоже на предыдущий вариант, но с большими ограничениями (не допускает подстановки переменных)</td>
+						</tr>
+					</table>
+					<span class="value">shopt -s</span>  - Активация параметров bash.<br>
+					<span class="value">shopt -u</span>  - Деактивация параметров bash.<br>
+					<span class="value">Xargs</span> – передает аргументы команде (find /usr/share -name '*README*' | xargs ls –l)
+				</article>
+				<article id="env-var">
+					<h1>Важнейшие оболочковые переменные</h1>
+					<p class="desc">
+						<span class="value">BASH</span> -
+						содержит имя файла bash.
+					</p>
+					<p class="desc">
+						<span class="value">HOME</span> -
+						содержит путь к домашнему каталогу, например  /home/mk .
+					</p>
+					<p class="desc">
+						<span class="value">LOGNAME</span> -
+						хранит логин (имя пользователя).
+					</p>
+					<p class="desc">
+						<span class="value">HOSTNAME </span> -
+						содержит хост-имя (имя компьютера).
+					</p>
+					<p class="desc">
+						<span class="value">MAIL </span> -
+						включает путь к каталогу, в котором сохраняется входящая почта (только если у вас установлен локальный почтовый сервер).
+					</p>
+					<p class="desc">
+						<span class="value">OLDPWD </span> -
+						содержит путь к последним использовавшимся каталогам.
+					</p>
+					<p class="desc">
+						<span class="value">PATH </span> -
+						хранит список каталогов. Если bash должна выполнить команду, она просматривает все каталоги, перечисленные в PATH,
+						в поисках команды. Каталоги отделяются друг от друга двоеточиями. Настройка  PATH  отличается от дистрибутива к дистрибутиву,
+						в различных местах системы в ходе запуска (Init-V, Upstart). Лучше всего производить собственные изменения в  /etc/profile
+						или (если в вашем дистрибутиве предусмотрена такая возможность) в файле каталога  /etc/profile.d . Туда необходимо вставить
+						команду в соответствии со следующим образцом:<br>
+						# Дополнение в /etc/profile или в /etc/profile.d/myown.sh
+						PATH=$PATH:/myown/bin<br>
+						Из соображений безопасности (чтобы избежать незапланированного выполнения программ в текущем каталоге), в  PATH  не указывается
+						локальный каталог. Если вы хотите выполнять программы, содержащиеся в текущем каталоге, не указывая перед ними ./ , нужно дополнить  PATH  точкой.
+
+					</p>
+					<p class="desc">
+						<span class="value">PROMPT_COMMAND </span> -
+						может содержать команду, выполняемую всякий раз, когда bash отображает приглашение командной строки.
+					</p>
+					<p class="desc">
+						<span class="value">PS1 </span> -
+						хранит последовательность символов, содержимое которой отображается рядом с началом каждой строки ввода (эта последовательность
+						называется подсказкой, или приглашением). В ней предусмотрены в числе прочих следующие последовательности символов:
+						\t - текущее время,  \d - сегодняшняя дата, \w - текущий каталог,  \W - последняя часть текущего каталога (например,  X11 для /usr/bin/X11 ),
+						\u - имя пользователя,  \h - хост-имя (имя компьютера), а также символ подсказки  \$  ( \$ - для обычных пользователей,  # - для администратора).
+					</p>
+					<p class="desc">
+						<span class="value">PS2 </span> -
+						похожа на  PS1 , но эта последовательность символов обычно отображается только для многострочного ввода (то есть если первая строка завершается символом  \ ).
+						Типичная настройка -  "&gt;"
+					</p>
+					<p class="desc">
+						<span class="value">PWD </span> -
+						содержит путь к текущему каталогу.
+					</p>
+					<p class="note">* - Список всех заданных переменных выводится с помощью команды printenv |   sort
+					</p>
+					<p><a href="http://bash-hackers.org/">http://bash-hackers.org/</a></p>
+				</article>
+				<article id="vars">
+					<h1>$-переменные</h1>
+					<table class="valueTable">
+						<tr class="header">
+							<th class="value">Переменная</th>
+							<th>Значение</th>
+						</tr>
+						<tr>
+							<td class="value">$?</td>
+							<td class="desc">Возвращаемое значение последней команды</td>
+						</tr>
+						<tr>
+							<td class="value">$!</td>
+							<td class="desc">Номер PID последнего запущенного фонового процесса</td>
+						</tr>
+						<tr>
+							<td class="value">$$</td>
+							<td class="desc">PID текущей оболочки</td>
+						</tr>
+						<tr>
+							<td class="value">$0</td>
+							<td class="desc">Имя файла, содержащего только что выполненный файл оболочки (или имя символьной ссылки, указывающей на файл)</td>
+						</tr>
+						<tr>
+							<td class="value">$#</td>
+							<td class="desc">Количество параметров, переданных программе оболочки</td>
+						</tr>
+						<tr>
+							<td class="value">От $1 до $9</td>
+							<td class="desc">Параметр от 1 до 9</td>
+						</tr>
+						<tr>
+							<td class="value">$* или $@</td>
+							<td class="desc">Совокупность всех переданных параметров</td>
+						</tr>
+					</table>
+				</article>
+				<article id="param-subst">
+					<h1>Подстановка параметров</h1>
+					<p class="desc">
+						<span class="value">${var:-default} </span> -
+						если переменная пуста, такое выражение возвращает в качестве результата установку, заданную по умолчанию.
+						В противном случае возвращается содержимое переменной. Сама переменная не изменяется.
+					</p>
+					<p class="desc">
+						<span class="value">${var:=default} </span> -
+						аналогично предыдущему, однако если до операции переменная была пуста, ее содержимое изменяется.
+					</p>
+					<p class="desc">
+						<span class="value">${var:+new}</span> -
+						если переменная была пуста, то она остается пустой. Если же переменная уже определена, то ее предыдущее содержимое
+						заменяется новым. Тогда выражение возвращает новое содержимое переменной.
+					</p>
+					<p class="desc">
+						<span class="value">${var:? Error_message} </span> -
+						если переменная пуста, то выводится имя переменной и сообщение об ошибке. Кроме того, программа оболочки завершает
+						работу. В противном случае выражение возвращает содержимое переменной.
+					</p>
+					<p class="desc">
+						<span class="value">${#var} </span> -
+						в качестве результата возвращает количество символов, сохраненных в переменной (0, если переменная пуста). Переменная не изменяется.
+					</p>
+					<p class="desc">
+						<span class="value">${var#pattern} </span> -
+						сравнивает начало переменной с заданным шаблоном. Если удается опознать шаблон, то выражение возвращает содержимое переменной
+						за исключением самого краткого фрагмента текста, хранящего поисковый шаблон. Если же соответствий шаблону найти не удается,
+						то возвращается содержимое переменной целиком. В поисковом шаблоне можно использовать подстановочные символы, с которыми мы познакомились,
+						обсуждая образование имен файлов ( * ? [abc] ). Переменная в любом случае остается неизменной:
+						<br><br>
+						<samp>
+							dat=/home/mk/buch/buch.tar.gz<br>
+							echo ${dat#*/}<br>
+							<span class="value">$home/mk/buch/buch.tar.gz</span>
+						<br><br>
+							echo ${dat#*.}<br>
+							<span class="value">tar.gz</span>
+						</samp>
+					</p>
+					<p class="desc">
+						<span class="value">${var##pattern} </span> -
+						аналогично предыдущему, но теперь удаляется самый крупный фрагмент текста, содержащий поисковый шаблон:
+						<br><br>
+						<samp>
+							dat=/home/mk/buch/buch.tar.gz<br>
+							echo ${dat##*/}<br>
+							<span class="value">buch.tar.gz</span>
+						<br><br>
+							echo ${dat##*.}<br>
+							<span class="value">gz</span>
+						</samp>
+					</p>
+					<p class="desc">
+						<span class="value">${var%pattern} </span> -
+						аналогично  ${var#pattern} , но в данном случае сопоставление образцов производится в конце содержимого
+						переменной. В конце переменной удаляется кратчайший фрагмент, содержащий поисковый шаблон.
+						Сама переменная не изменяется:
+						<br><br>
+						<samp>
+							dat=/home/mk/buch/buch.tar.gz<br>
+							echo ${dat%/*}<br>
+							<span class="value">/home/mk/buch</span>
+						<br><br>
+							echo ${dat%.*}<br>
+							<span class="value">/home/mk/buch/buch.tar</span>
+						</samp>
+					</p>
+					<p class="desc">
+						<span class="value">${var%% pattern} </span> -
+						аналогично предыдущему, но теперь удаляется самый крупный фрагмент текста,
+						содержащий поисковый шаблон и находящийся в конце переменной:
+						<br><br>
+						<samp>
+							dat=/home/mk/buch/buch.tar.gz<br>
+							echo ${dat%%/*}<br>
+							<span class="value">-- вывод отсутствует --</span>
+						<br><br>
+							echo ${dat%%.*}<br>
+							<span class="value">/home/mk/buch/buch</span>
+						</samp>
+					</p>
+					<p class="desc">
+						<span class="value">${var/find/replace} </span> -
+						замена первого совпадения с шаблоном  find  посредством replace:
+						<br><br>
+						<samp>
+							x='abcdeab12ab'<br>
+							echo echo ${x/ab/xy}<br>
+							<span class="value">xycdeab12ab</span>
+						</samp>
+					</p>
+					<p class="desc">
+						<span class="value">${var//find/replace}</span> -
+						замена всех совпадений с шаблоном  find  посредством replace:
+						<br><br>
+						<samp>
+							x='abcdeab12ab'<br>
+							echo echo ${x//ab/xy}<br>
+							<span class="value">xycdexy12xy</span>
+						<samp>
+					</p>
+					<p class="desc">
+						<span class="value">${!var} </span> -
+						возврат содержимого переменной, имя которой в виде последовательности символов содержится в  var:
+						<br><br>
+						<samp>
+							abc="123"<br>
+							efg=abc<br>
+							echo ${!efg}<br>
+							<span class="value">123</span>
+						</samp>
+					</p>
+				</article>
+				<article id="test">
+					<h1>Формулирование условий с помощью test</h1>
+					<p class="desc">
+						<span class="value">test "$x" </span> -
+						проверяет, занят ли  x  (то есть, если в последовательности символов содержится 0 символов, имеем «ложно»; в противном случае «истинно»).
+					</p>
+					<p class="desc">
+						<span class="value">test $x -gt 5 </span> -
+						проверяет, имеет ли переменная  x  числовое значение больше 5. Если  x  не содержит числа, выводится сообщение об ошибке.
+						Вместо  -gt  (больше) могут также использоваться следующие операторы сравнения:  -eq  (равно),  -ne (не равно),  -lt  (меньше),
+						-le  (меньше или равно) и  -ge  (больше или равно).
+					</p>
+					<p class="desc">
+						<span class="value">test -f $x </span> -
+						проверяет, существует ли файл с именем, указанным в  x.
+					</p>
+				</article>
+				<article id="symbols">
+					<h1>Специальные символы, используемые в bash</h1>
+					<table class="valueTable">
+						<tr class="header">
+							<th class="value">Символ</th>
+							<th>Значение</th>
+						</tr>
+						<tr>
+							<td class="value">;</td>
+							<td class="desc">Отделение команд друг от друга</td>
+						</tr>
+						<tr>
+							<td class="value">:</td>
+							<td class="desc">Команда оболочки, ничего не делает</td>
+						</tr>
+						<tr>
+							<td class="value">.</td>
+							<td class="desc">Запуск оболочки без собственного командного подпроцессора (.i  file  соответствует исходному файлу)</td>
+						</tr>
+						<tr>
+							<td class="value">#</td>
+							<td class="desc">Ввод комментария</td>
+						</tr>
+						<tr>
+							<td class="value">#!/bin/sh</td>
+							<td class="desc">Идентификация оболочки, в которой будет выполняться программа</td>
+						</tr>
+						<tr>
+							<td class="value">&amp;</td>
+							<td class="desc">Выполнение команды в фоновом режиме (com &)</td>
+						</tr>
+						<tr>
+							<td class="value">&amp;&amp;</td>
+							<td class="desc">Выполнение одной команды в зависимости от результата другой (com1 &amp;&amp; com2)</td>
+						</tr>
+						<tr>
+							<td class="value">&amp;&gt;</td>
+							<td class="desc">Переадресация стандартного вывода и ошибок (соответствует >&)</td>
+						</tr>
+						<tr>
+							<td class="value">|</td>
+							<td class="desc">Создание программных каналов (com1 | com2)</td>
+						</tr>
+						<tr>
+							<td class="value">||</td>
+							<td class="desc">Выполнение одной команды в зависимости от результата другой (com1 || com2)</td>
+						</tr>
+						<tr>
+							<td class="value">*</td>
+							<td class="desc">Джокерный символ для имен файлов (любое количество символов)</td>
+						</tr>
+						<tr>
+							<td class="value">[abc]</td>
+							<td class="desc">Сокращенный вариант записи test expression</td>
+						</tr>
+						<tr>
+							<td class="value">[ expression ]</td>
+							<td class="desc">Сокращенный вариант записи test expression</td>
+						</tr>
+						<tr>
+							<td class="value">(...)</td>
+							<td class="desc">Выполнение команд в той же оболочке ((сom1; сom2))</td>
+						</tr>
+						<tr>
+							<td class="value">{...}</td>
+							<td class="desc">Группирование команд</td>
+						</tr>
+						<tr>
+							<td class="value">{ , , }</td>
+							<td class="desc">Объединение нескольких последовательностей символов (a{1,2,3} → a1 a2 a3)</td>
+						</tr>
+						<tr>
+							<td class="value">{a . .b}</td>
+							<td class="desc">Объединение нескольких последовательностей символов (b{4..6} → b4 b5 b6)</td>
+						</tr>
+						<tr>
+							<td class="value">~</td>
+							<td class="desc">Сокращенное обозначение домашнего каталога</td>
+						</tr>
+						<tr>
+							<td class="value">&gt;</td>
+							<td class="desc">Переадресация вывода в файл (com &gt; file)</td>
+						</tr>
+						<tr>
+							<td class="value">&gt;&gt;</td>
+							<td class="desc">Переадресация вывода и добавление его в существующий файл</td>
+						</tr>
+						<tr>
+							<td class="value">&gt;&amp;</td>
+							<td class="desc">Переадресация стандартного вывода и ошибок (соответствует &>)</td>
+						</tr>
+						<tr>
+							<td class="value">2&gt;</td>
+							<td class="desc">Переадресация стандартного вывода ошибок</td>
+						</tr>
+						<tr>
+							<td class="value">&lt;</td>
+							<td class="desc">Переадресация ввода из файла (com &lt; file)</td>
+						</tr>
+						<tr>
+							<td class="value">&lt;&lt; end</td>
+							<td class="desc">Переадресация ввода из активного файла до завершения</td>
+						</tr>
+						<tr>
+							<td class="value">$</td>
+							<td class="desc">Обозначение переменных (echo $var)</td>
+						</tr>
+						<tr>
+							<td class="value">$!</td>
+							<td class="desc">Номер PID последнего процесса, запущенного в фоновом режиме</td>
+						</tr>
+						<tr>
+							<td class="value">$$</td>
+							<td class="desc">PID актуальной оболочки</td>
+						</tr>
+						<tr>
+							<td class="value">$0</td>
+							<td class="desc">Имя выполняемого в данный момент сценарного файла оболочки</td>
+						</tr>
+						<tr>
+							<td class="value">$1-$9</td>
+							<td class="desc">Первые девять параметров, переданных команде</td>
+						</tr>
+						<tr>
+							<td class="value">$#</td>
+							<td class="desc">Количество параметров, переданных программе оболочки</td>
+						</tr>
+						<tr>
+							<td class="value">$* или $@</td>
+							<td class="desc">Совокупность всех переданных параметров</td>
+						</tr>
+						<tr>
+							<td class="value">$?</td>
+							<td class="desc">Возвращаемое значение последней команды (0=OK или номер ошибки)</td>
+						</tr>
+						<tr>
+							<td class="value">$(…)</td>
+							<td class="desc">Подстановка команд (echo $(ls))</td>
+						</tr>
+						<tr>
+							<td class="value">${…}</td>
+							<td class="desc">Различные специальные функции для обработки последовательностей символов</td>
+						</tr>
+						<tr>
+							<td class="value">$[…]</td>
+							<td class="desc">Арифметические вычисления (echo $[2+3])</td>
+						</tr>
+						<tr>
+							<td class="value">"..."</td>
+							<td class="desc">Предотвращение интерпретации большинства специальных символов</td>
+						</tr>
+						<tr>
+							<td class="value">'...'</td>
+							<td class="desc">Предотвращение интерпретации всех специальных символов</td>
+						</tr>
+						<tr>
+							<td class="value">` . . .`</td>
+							<td class="desc">Подстановка команд (echo `ls`)</td>
+						</tr>
+					</table>
+				</article>
+			</section>
+		</main>
+	</body>
+</html>

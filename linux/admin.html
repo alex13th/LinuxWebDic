@@ -1,0 +1,626 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href="../css/style.css"  type="text/css" rel="stylesheet">
+	<title>Справочник по основнам Linux - Администрирование</title>
+</head>
+<body>
+	<header>
+		<nav class="mainMenu">
+			<ul class="topMenu">
+				<li><a href="../index.html">Home</a></li>
+				<li class="activeMenu"><a href="../linux/index.html">Linux</a></li>
+				<li><a href="../regexp/index.html">RegExp</a></li>
+				<li><a href="../virtualbox/index.html">VirtualBox</a></li>
+				<li><a href="../vagrant/index.html">Vagrant</a></li>
+				<li><a href="../ansible/index.html">Ansible</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<nav>
+			<ul>
+				<h2>Администрирование</h2>
+					<li><a href="#demons">Работа с демонами</a></li>
+					<li><a href="#crontab">Столбцы crontab</a></li>
+					<li><a href="#ftp-cmd">Команды <abbr title="File Transfer Protocol">FTP</abbr></a></li>
+					<li><a href="#tools">Инструменты</a></li>
+					<li><a href="#users-cmd">Пользователи/групы</a></li>
+					<li><a href="#shadow">Файл shadow</a></li>
+					<li><a href="#pam"><abbr title="Pluggable Authentication Modules">PAM</abbr></a></li>
+					<li><a href="#nss"><abbr title="Network Security Services">NSS</abbr></a></li>
+					<li><a href="#rpm">Использование <abbr title="RPM Package Manager (RPM)">RPM</abbr></a></li>
+					<li><a href="#ipv6">IPv6 и Linux</a></li>
+			</ul>
+		</nav>
+		<section>
+			<article id="demons">
+				<h1>Работа с демонами</h1>
+				<h2>Запуск вручную</h2>
+				<table class="tabTable"><var>
+					<tr>
+						<td class="value">service <var>имя</var> start</td>
+						<td class="desc">(Функционирует почти во всех дистрибутивах)</td>
+					</tr>
+					<tr>
+						<td class="value">/etc/init.d/<var>имя</var> start</td>
+						<td class="desc">(Процессы Init-V)</td>
+					</tr>
+					<tr>
+						<td class="value">invoke-rc.d <var>имя</var> start</td>
+						<td class="desc">(Работает c Init-V в Debian)</td>
+					</tr>
+					<tr>
+						<td class="value">rc <var>имя</var> start</td>
+						<td class="desc">(Работает c Init-V в SUSE)</td>
+					</tr>
+					<tr>
+						<td class="value">start <var>имя</span></td>
+						<td class="desc">(Upstart, например в Ubuntu)</td>
+					</tr>
+					<tr>
+						<td class="value">start <var>имя</span></td>
+						<td class="desc">(Upstart, например в Ubuntu)</td>
+					</tr>
+					<tr>
+						<td class="value">systemctl start <var>имя</span>.service</td>
+						<td class="desc">(Systemd, например в Fedora и openSUSE)</td>
+					</tr>
+				</table>
+				<h2>Остановка вручную</h2>
+				<table class="tabTable">
+					<tr>
+						<td class="value">service <var>имя</var> stop</td>
+						<td class="desc">(Почти во всех современных дистрибутивах)</td>
+					</tr>
+					<tr>
+						<td class="value">/etc/init.d/<span class="subst">имя</var> stop</td>
+						<td class="desc">(Процессы Init-V)</td>
+					</tr>
+					<tr>
+						<td class="value">invoke-rc.d <var>имя</var> stop</td>
+						<td class="desc">(Работает c Init-V в Debian)</td>
+					</tr>
+					<tr>
+						<td class="value">rc<var>имя</var> stop</td>
+						<td class="desc">(Работает c Init-V в SUSE)</td>
+					</tr>
+					<tr>
+						<td class="value">stop <var>имя</span></td>
+						<td class="desc">(Upstart)</td>
+					</tr>
+					<tr>
+						<td class="value">systemctl stop <var>имя</span>.service </td>
+						<td class="desc">(Systemd)</td>
+					</tr>
+				</table>
+				<h2>Перезагрузка/перезапуск</h2>
+				<table class="tabTable">
+					<tr>
+						<td class="value">service <var>имя</var> reload/restart</td>
+						<td class="desc">(Почти во всех современных дистрибутивах)</td>
+					</tr>
+					<tr>
+						<td class="value">/etc/init.d/<span class="subst">имя</var> reload/restart</td>
+						<td class="desc">(Процессы Init-V)</td>
+					</tr>
+					<tr>
+						<td class="value">invoke-rc.d <var>имя</var> reload/restart</td>
+						<td class="desc">(Работает с Init-V в Debian)</td>
+					</tr>
+					<tr>
+						<td class="value">rc<var>имя</var> reload/restart</td>
+						<td class="desc">(Работает с Init-V в SUSE)</td>
+					</tr>
+					<tr>
+						<td class="value">reload/restart <var>имя</span></td>
+						<td class="desc">(Upstart)</td>
+					</tr>
+					<tr>
+						<td class="value">systemctl reload <var>имя</span>.service</td>
+						<td class="desc">(Systemd)</td>
+					</tr>
+				</table>
+				<h2>Автоматический старт при запуске компьютера</h2>
+				<table class="tabTable">
+					<tr>
+						<td class="value">insserv <var>имя</span></td>
+						<td class="desc">(Специфично для Init-V в Debian и SUSE)</td>
+					</tr>
+					<tr>
+						<td class="value">chkconfig --add <var>имя</span></td>
+						<td class="desc">(Специфично для Init-V в Red Hat)</td>
+					</tr>
+					<tr>
+						<td class="value">chkconfig --level 35 <var>имя</var> on</td>
+						<td class="desc">(Специфично для Init-V в Red Hat)</td>
+					</tr>
+					<tr>
+						<td class="value">systemctl enable <var>имя</span>.service</td>
+						<td class="desc">(Systemd)</td>
+					</tr>
+				</table>
+				<h2>Предотвращение автоматического запуска</h2>
+				<table class="tabTable">
+					<tr>
+						<td class="value">insserv -r <var>имя</span></td>
+						<td class="desc">(Специфично для Init-V в Debian и SUSE)</td>
+					</tr>
+					<tr>
+						<td class="value">chkconfig --del <var>имя</span></td>
+						<td class="desc">(Специфично для Init-V в Red Hat)</td>
+					</tr>
+					<tr>
+						<td class="value">systemctl disable <var>имя</span>.service</td>
+						<td class="desc">(Systemd)</td>
+					</tr>
+				</table>
+			</article>
+			<article id="crontab">
+				<h1>Столбцы crontab</h1>
+				<p>
+					Файл /etc/crontab или файлы в каталоге /etc/cron.d содержат построчные записи,
+					в которых перечисляются программы, предназначенные для выполнения.
+				</p>
+				<figure>
+					<figcaption>Синтаксис:</figcaption>
+					<p>
+						<samp># in /etc/crontab<br>минута час день месяц неделя пользователь команда</samp>
+					</p>
+				</figure>
+				<table class="valueTable">
+					<thead>
+						<tr>
+							<th class="value">Столбец</th>
+							<th>Значение</th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="value">Минута</td>
+						<td class="desc">Указывает, в какую минуту часа (0–59) должна выполняться программа</td>
+					</tr>
+					<tr>
+						<td class="value">Час</td>
+						<td class="desc">Указывает час (0–23)</td>
+					</tr>
+					<tr>
+						<td class="value">День</td>
+						<td class="desc">Указывает день месяца (1–31)</td>
+					</tr>
+					<tr>
+						<td class="value">Месяц</td>
+						<td class="desc">Указывает месяц (1–12)</td>
+					</tr>
+					<tr>
+						<td class="value">Неделя</td>
+						<td class="desc">Указывает день недели (0–7, и 0, и 7 соответствуют воскресенью)</td>
+					</tr>
+					<tr>
+						<td class="value">Пользователь</td>
+						<td class="desc">Указывает, какой пользователь должен выполнять команду (обычно это администратор)</td>
+					</tr>
+					<tr>
+						<td class="value">Команда</td>
+						<td class="desc">Получает команду, которую необходимо выполнить</td>
+					</tr>
+				</table>
+			</article>
+			<article id="ftp-cmd">
+				<h1>Команды для работы с <abbr title="File Transfer Protocol">FTP</abbr></h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Команда</th>
+						<th>Функция</th>
+					</tr>
+					<tr>
+						<td class="value">?</td>
+						<td class="desc">Вывод списка всех команд <abbr title="File Transfer Protocol">FTP</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">!</td>
+						<td class="desc">Выполнение команд оболочки</td>
+					</tr>
+					<tr>
+						<td class="value">ascii</td>
+						<td class="desc">Переход в текстовый режим</td>
+					</tr>
+					<tr>
+						<td class="value">binary</td>
+						<td class="desc">Переход в двоичный режим</td>
+					</tr>
+					<tr>
+						<td class="value">bye</td>
+						<td class="desc">Завершение работы <abbr title="File Transfer Protocol">FTP</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">cd <var>dir</var></td>
+						<td class="desc">Переход в указанный каталог <abbr title="File Transfer Protocol">FTP</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">close</td>
+						<td class="desc">Завершение соединения с сервером <abbr title="File Transfer Protocol">FTP</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">get <var>file</var></td>
+						<td class="desc">Передача файла из архива <abbr title="File Transfer Protocol">FTP</abbr> в текущий каталог</td>
+					</tr>
+					<tr>
+						<td class="value">help <var>«команда»</var></td>
+						<td class="desc">Вывод краткой справочной информации по указанной команде</td>
+					</tr>
+					<tr>
+						<td class="value">lcd <var>dir</var></td>
+						<td class="desc">Смена текущего каталога на локальном компьютере</td>
+					</tr>
+					<tr>
+						<td class="value">lcd <var>dir</var></td>
+						<td class="desc">Смена текущего каталога на локальном компьютере</td>
+					</tr>
+					<tr>
+						<td class="value">ls</td>
+						<td class="desc">Вывод списка всех файлов, находящихся на <abbr title="File Transfer Protocol">FTP</abbr>-сервере</td>
+					</tr>
+					<tr>
+						<td class="value">lls</td>
+						<td class="desc">Вывод списка всех файлов, находящихся на локальном компьютере</td>
+					</tr>
+					<tr>
+						<td class="value">mget <var>*.pattern</var></td>
+						<td class="desc">Передача всех файлов, отвечающих образцу, из <abbr title="File Transfer Protocol">FTP</abbr>-архива в текущий каталог</td>
+					</tr>
+					<tr>
+						<td class="value">open</td>
+						<td class="desc">Соединение со сторонним компьютером (если первая попытка не удалась)</td>
+					</tr>
+					<tr>
+						<td class="value">prompt</td>
+						<td class="desc">Активация/деактивация автоматического запроса о подтверждении передачи любого файла с помощью mget</td>
+					</tr>
+					<tr>
+						<td class="value">put <var>«файл»</var></td>
+						<td class="desc">Передача файла из текущего каталога в <abbr title="File Transfer Protocol">FTP</abbr>-архив (upload)</td>
+					</tr>
+					<tr>
+						<td class="value">quit</td>
+						<td class="desc">Завершение работы <abbr title="File Transfer Protocol">FTP</abbr></td>
+					</tr>
+					<tr>
+						<td class="value">reget <var>«файл»</span></td>
+						<td class="desc">Продолжение передачи файла, который ранее был передан частично</td>
+					</tr>
+					<tr>
+						<td class="value">user</td>
+						<td class="desc">Возможность ввести новый логин</td>
+					</tr>
+				</table>
+			</article>
+			<article id="tools">
+				<h1>Инструменты для администрирования</h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Ссылка</th>
+						<th>Описание функции</th>
+						<th>Бесплатный</th>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://webmin.com/" target="_blank">http://webmin.com/</a></td>
+						<td class="desc">Администрирование системы и сети</td>
+						<td class="check">+</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://fai-project.org/" target="_blank">http://fai-project.org/</a></td>
+						<td class="desc">Установка и распределение программного обеспечения</td>
+						<td class="check">+</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://m23.sourceforge.net/" target="_blank">http://m23.sourceforge.net/</a></td>
+						<td class="desc">Распределение и администрирование программного обеспечения</td>
+						<td class="check">-</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://directory.fedoraproject.org/" target="_blank">http://directory.fedoraproject.org/</a></td>
+						<td class="desc">Пользовательский интерфейс для RHEL/Fedora, работающий по протоколу
+						<abbr title="Lightweight Directory Access Protocol — «облегчённый протокол доступа к каталогам»">LDAP</abbr></td>
+						<td class="check">+</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="https://oss.gonicus.de/labs/gosa/" target="_blank">https://oss.gonicus.de/labs/gosa/</a></td>
+						<td class="desc">Создание учетной записи для управления Debian по
+						<abbr title="Lightweight Directory Access Protocol — «облегчённый протокол доступа к каталогам»">LDAP</abbr></td>
+						<td class="check">+</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://redhat.com/rhn/" target="_blank">http://redhat.com/rhn/</a></td>
+						<td class="desc">Администрирование Red Hat</td>
+						<td class="check">-</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://novell.com/zenworks/" target="_blank">http://novell.com/zenworks/</a></td>
+						<td class="desc">Администрирование Novell/SUSE</td>
+						<td class="check">-</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://canonical.com/landscape/" target="_blank">http://canonical.com/landscape/</a></td>
+						<td class="desc">Администрирование Ubuntu</td>
+						<td class="check">-</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://univention.de/produkte/ucs/" target="_blank">http://univention.de/produkte/ucs/</a></td>
+						<td class="desc">Конфигурирование сервера локальной сети и почтового сервера</td>
+						<td class="check">-</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://zentyal.org/" target="_blank">http://zentyal.org/</a></td>
+						<td class="desc">Конфигурирование сервера локальной сети (ранее — eBox)</td>
+						<td class="check">-</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://cpanel.net/" target="_blank">http://cpanel.net/</a></td>
+						<td class="desc">Администрирование корневого и веб-сервера</td>
+						<td class="check">-</td>
+					</tr>
+					<tr>
+						<td class="link value"><a href="http://parallels.com/plesk/" target="_blank">http://parallels.com/plesk/</a></td>
+						<td class="desc">Администрирование корневого и веб-сервера</td>
+						<td class="check">-</td>
+					</tr>
+				</table>
+			</article>
+			<article id="users-cmd">
+				<h1>Команды для управления пользователями и группами</h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Команда</th>
+						<th>Функция</th>
+					</tr>
+					<tr>
+						<td class="value">adduser</td>
+						<td class="desc">Создает учетную запись нового пользователя (Debian)</td>
+					</tr>
+					<tr>
+						<td class="value">addgroup</td>
+						<td class="desc">Создает новую группу (Debian)</td>
+					</tr>
+					<tr>
+						<td class="value">chgrp</td>
+						<td class="desc">Изменяет групповую отнесенность файла</td>
+					</tr>
+					<tr>
+						<td class="value">chmod</td>
+						<td class="desc">Изменяет биты доступа определенного файла</td>
+					</tr>
+					<tr>
+						<td class="value">chown</td>
+						<td class="desc">Передает файл другому владельцу</td>
+					</tr>
+					<tr>
+						<td class="value">chsh</td>
+						<td class="desc">Изменяет стандартную оболочку, применяемую при работе данным пользователем</td>
+					</tr>
+					<tr>
+						<td class="value">delgroup</td>
+						<td class="desc">Удаляет группу (Debian)</td>
+					</tr>
+					<tr>
+						<td class="value">deluser</td>
+						<td class="desc">Удаляет учетную запись пользователя (Debian)</td>
+					</tr>
+					<tr>
+						<td class="value">groupadd</td>
+						<td class="desc">Создает новую группу</td>
+					</tr>
+					<tr>
+						<td class="value">groupdel</td>
+						<td class="desc">Удаляет группу</td>
+					</tr>
+					<tr>
+						<td class="value">groupmod</td>
+						<td class="desc">Изменяет свойства группы</td>
+					</tr>
+					<tr>
+						<td class="value">groups</td>
+						<td class="desc">Показывает группы, к которым принадлежит данный пользователь</td>
+					</tr>
+					<tr>
+						<td class="value">id</td>
+						<td class="desc">Показывает ID-номера текущей группы и текущего пользователя</td>
+					</tr>
+					<tr>
+						<td class="value">newgrp</td>
+						<td class="desc">Изменяет активную группу определенного пользователя</td>
+					</tr>
+					<tr>
+						<td class="value">newusers</td>
+						<td class="desc">Создает несколько новых пользовательских учетных записей</td>
+					</tr>
+					<tr>
+						<td class="value">passwd</td>
+						<td class="desc">Изменяет пароль пользователя</td>
+					</tr>
+					<tr>
+						<td class="value">useradd</td>
+						<td class="desc">Создает новую учетную запись пользователя</td>
+					</tr>
+					<tr>
+						<td class="value">userdel</td>
+						<td class="desc">Удаляет учетную запись пользователя</td>
+					</tr>
+					<tr>
+						<td class="value">usermod</td>
+						<td class="desc">Изменяет свойства учетной записи пользователя</td>
+					</tr>
+				</table>
+			</article>
+			<article id="shadow">
+				<h1>Формат файла shadow</h1>
+				<p>
+					Чтобы осложнить жизнь потенциальным агрессорам, в новых системах Linux зашифрованные
+					коды-пароли сохраняются не прямо в /etc/passwd, а в отдельном файле /etc/shadow.
+					Преимущество заключается в том, что этот файл может читать только администратор.
+					(Файлы /etc/passwd и /etc/group должны быть доступны для чтения всем пользователям системы,
+					так как содержат элементарную информацию по управлению системой. А к файлу /etc/shadow могут
+					иметь доступ только программы для верификации и изменения паролей. Поэтому потенциальный
+					агрессор должен сначала получить доступ администратора и только потом сможет прочитать
+					зашифрованные коды-пароли.)
+				</p>
+				<figure>
+					<figcaption>Формат файла shadow:</figcaption>
+					<p>
+						<samp>Логин:Код-пароль:d1:d2:d3:d4:d5:d6:reserved</samp>
+					</p>
+				</figure>
+				<figure>
+					<figcaption>Фрагмент файла:</figcaption>
+					<p>
+						<samp>
+							root:$6$Ecrkix...:14391:0:99999:7:::<br>
+							daemon:*:14391:0:99999:7:::<br>
+							bin:*:14391:0:99999:7:::<br>
+							...<br>
+							kofler:$6$TZR7...:14391:0:99999:7:::<br>
+						</samp>
+					</p>
+				</figure>
+				<h2>Поля d1-d6</h2>
+				<ul>
+					<li>d1 указывает, когда пароль был в последний раз изменен (данные указываются в днях, прошедших с 01.01.1970);</li>
+					<li>d2 определяет, через сколько дней можно изменить пароль;</li>
+					<li>d3 указывает, через сколько дней пароль обязательно необходимо изменить, прежде чем он станет недействителен (подробности об этих полях сообщаются в файле справки man 5 shadow);</li>
+					<li>d4 определяет, за сколько дней до истечения срока действия пароля пользователь начнет получать об этом предупреждения;</li>
+					<li>d5 указывает, через сколько дней просроченная учетная запись без действующего пароля будет полностью деактивирована;</li>
+					<li>d6 задает, когда именно учетная запись будет деактивирована.</li>
+				</ul>
+			</article>
+			<article id="pam">
+				<h1>Реакция на нарушение правил <abbr title="Pluggable Authentication Modules">PAM</abbr></h1>
+				<table class="valueTable">
+					<tr class="header">
+						<th class="value">Ключевое слово</th>
+						<th>Реакция</th>
+					</tr>
+					<tr>
+						<td class="value">requisite</td>
+						<td class="desc"><abbr title="Pluggable Authentication Modules">PAM</abbr> сразу же возвращает отрицательный результат и остальные правила уже не обрабатываются</td>
+					</tr>
+					<tr>
+						<td class="value">required</td>
+						<td class="desc">При нарушении правила функция <abbr title="Pluggable Authentication Modules">PAM</abbr> возвращает отрицательный результат; дальнейшие правила обрабатываются, но результат обработки не учитывается</td>
+					</tr>
+					<tr>
+						<td class="value">sufficient</td>
+						<td class="desc">Если правило выполняется, то функция <abbr title="Pluggable Authentication Modules">PAM</abbr> сразу же возвращает положительный результат (если только уже не было нарушено предшествующее правило requisite); остальные правила не обрабатываются. При нарушении <abbr title="Pluggable Authentication Modules">PAM</abbr> продолжает работу со следующего правила</td>
+					</tr>
+					<tr>
+						<td class="value">optional</td>
+						<td class="desc">Результат выполнения правила важен только тогда, когда речь идет о единственном правиле определенного типа и об определенной службе (например, su)</td>
+					</tr>
+				</table>
+			</article>
+			<article id="nss">
+				<h1>Диспетчер переключения имен (<abbr title="Network Security Services">NSS</abbr>)</h1>
+				<p>При входе в систему, управлении правами доступа к файлам, доступе к сети и т. д.
+				может потребоваться практически любая информация об именах пользователей и групп, <abbr title="User Identifier">UID</abbr> и
+				<abbr title="Group Identifier">GID</abbr>, хост-именах, портах сетевых служб и т. д.
+				По умолчанию эти данные находятся в файлах /etc/passwd, /etc/group, /etc/hosts, /etc/services и т. д.</p>
+				<p>В номенклатуре UNIX или Linux доступ к таким службам обобщается термином службы имен.
+				За выполнение этих задач отвечает диспетчер службы имен (<abbr title="Network Security Services">NSS</abbr>),
+				сборник функций библиотеки libc.
+				Как и при аутентификации, можно настроить источник данных для <abbr title="Network Security Services">NSS</abbr>,
+				например, в том случае, если данные предоставляет сервер
+				<abbr title="Lightweight Directory Access Protocol — «облегчённый протокол доступа к каталогам»">LDAP</abbr>.
+				Важнейшим конфигурационным файлом является /etc/nsswitch.conf.</p>
+				<p>Первый столбец в nsswitch.conf содержит информацию о базе данных или файле.
+				После двоеточия стоят ключевые слова, описывающие способ доступа к данным,
+				а также иногда реакцию на полученные данные (в квадратных скобках).
+				В следующем списке объяснены важнейшие ключевые слова, связанные с методами доступа.
+				Если в одной строке указано несколько методов доступа, они применяются по порядку,
+				пока один из них не подойдет.
+				Подробная информация по синтаксису содержится в man nsswitch.conf</p>
+				<ul>
+					<li>files — обращается к традиционным конфигурационным файлам, например /etc/passwd или /etc/group.</li>
+					<li>compat — аналогично files, причем данным о пользователях и группах могут предшествовать символы + и -.
+					Так улучшается совместимость с <abbr title="Network Information Service">NIS</abbr>. Это слово нельзя комбинировать
+					с другими ключевыми словами.</li>
+					<li>db — считывает информацию из файла баз данных <abbr title="Berkeley DB">BDB</abbr>.</li>
+					<li>dns — связывается с сервером имен.</li>
+					<li>mdns — использует многоадресную <abbr title="Domain Name System ">DNS</abbr> (она же Zeroconf или Apple Bonjour/Rendezvous).</li>
+				</ul>
+			</article>
+			<article id="rpm">
+				<h1>Типичные ситуации, в которых используется команда rpm</h1>
+				<ul>
+					<li>Установка программы abc:
+						<p class="value">rpm -i abc-2.0.7-1.i686.rpm</p>
+					</li>
+					<li>Загрузка файла ключа GPG с http://myserver.com и приведение его в форму файла ключа для RPM:
+						<p class="value">rpm --import http://myserver.com/RPM-myserver-GPG-KEY</p>
+					</li>
+					<li>Обновление программы abc, причем файл пакета скачивается прямо с указанного сервера:
+						<p class="value">rpm -U http://myserver.com/mypath/abc-2.1.0-2.i686.rpm</p>
+					</li>
+					<li>Вывод списка всех файлов, входящих в abc, которые были изменены с момента установки:
+						<p class="value">rpm -V abc</p>
+					</li>
+					<li>Удаление программы abc:
+						<p class="value">rpm -e abc</p>
+					</li>
+					<li>Составление списка всех установленных пакетов:
+						<p class="value">rpm -qa</p>
+					</li>
+					<li>Составление списка всех установленных пакетов, причем пакеты сортируются по дате установки (чем позже был установлен пакет, тем выше в списке он расположен):
+						<p class="value">rpm -qa --last</p>
+					</li>
+					<li>Составление списка всех установленных пакетов, в названии которых содержится последовательность символов mysql (в любом регистре):
+						<p class="value">rpm -qa | grep -i mysql</p>
+					</li>
+					<li>Выдача информации о пакете perl (если он установлен):
+						<p class="value">rpm -qi perl</p>
+					</li>
+					<li>Перечисление всех файлов из пакета perl:
+						<p class="value">rpm -ql perl</p>
+					</li>
+					<li>Перечисление всех файлов документации из пакета perl:
+						<p class="value">rpm -qd perl</p>
+					</li>
+					<li>Перечисление всех конфигурационных файлов пакета cups:
+						<p class="value">rpm -qc cups</p>
+					</li>
+					<li>Выдача информации об еще не установленном пакете. Для этого на локальном компьютере должен быть доступен RPM-файл:
+						<p class="value">rpm -qip abc-2.0.7-1.i686.rpm</p>
+					</li>
+					<li>Указание, из какого пакета взят файл /usr/lib/libz.so (результат: kdelibs):
+						<p class="value">rpm -qf rpm -qf /usr/lib/libkdnssd.so</p>
+					</li>
+					<li>Указание, какие атрибуты предоставляет пакет php-mysql. Результат в Fedora 11: ysql.so, mysqli.so, pdo_mysql.so, php-mysqli, php_database и php-mysql=5.2.9-2. Атрибуты применяются для отмены межпакетных взаимосвязей. Обычно названия атрибутов соответствуют названиям программ или библиотек, предоставляющих пакет. Так или иначе, от администратора пакетов любого дистрибутива зависит, каким образом будут определяться атрибуты. Атрибут также может содержать номер версии.
+						<p class="value">rpm -q --provides php-mysql</p>
+					</li>
+					<li>Указание, какие условия должны выполняться для установки пакета php-mysql. В Fedora конечный список атрибутов получается очень длинным, поэтому здесь я приведу только выдержки из него: libc.so.6, libm.so.6, libmysqlclient.so.16, php-common=5.2.9-2 и php-pdo.
+						<p class="value">rpm -q --requires php-mysql</p>
+					</li>
+					<li>Команды rpm -q --provides или rpm -q –provides также можно комбинировать с параметром -p, чтобы узнавать списки атрибутов для еще не установленных пакетов (в предыдущем примере — alien):
+						<p class="value">rpm -q --requires -p alien-8.56-2.i586.rpm</p>
+					</li>
+					<li>Указание, какой из уже установленных пакетов предоставляет атрибут mysqli.so (результат: пакет php-mysql):
+						<p class="value">rpm -q --whatprovides mysqli.so</p>
+					</li>
+					<li>Выдача практически бесконечного списка всех установленных пакетов, зависящих от атрибута libpthread.so.0 (кстати, одноименная библиотека предоставляется пакетом glibc):
+						<p class="value">rpm -q --whatrequires libpthread.so.0</p>
+					</li>
+				</ul>
+			</article>
+			<article id="ipv6">
+				<h1><abbr title=" Internet Protocol version 6">IPv6</abbr> и Linux</h1>
+				<ul>
+					<li><a href="http://www.ipv6.org/" target="_blank"><abbr title=" Internet Protocol version 6">IPv6</abbr> launch woeld</a></li>
+					<li><a href="http://ru.wikipedia.org/wiki/IPv6" target="_blank">Wikipedia</a></li>
+					<li><a href="http://www.faqs.org/rfcs/rfc1752.html" target="_blank"><abbr title="Request for Comments, RFC">RFC</abbr> 1752
+						<abbr title="Frequently Asked Questions, FAQ, F.A.Q.">FAQs</abbr></a></li>
+					<li><a href="https://geekbrains.ru/events/904" target="_blank"><abbr title=" Internet Protocol version 6">IPv6</abbr> для новичков</a></li>
+					<li><a href="https://geekbrains.ru/tests" target="_blank">Тесты</a></li>
+				</ul>
+			</article>
+		</section>
+	</main>
+</body>
+</html>
