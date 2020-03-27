@@ -89,8 +89,10 @@ section > article::after {
 	border-bottom: 1em dotted #CCC;
 }
 
-article.overview h2, ul {
+article.overview h2,
+article.overview ul {
 	text-align: center;
+	padding: 0;
 }
 
 article.overview li {
@@ -116,7 +118,7 @@ body {
 
 /* Begin Header block style */
 header {
-	flex-basis: 36px;
+	flex-basis: 3em;
 	font-size: 1.1em;
 	margin: 0;
 	order: 1;
@@ -230,6 +232,7 @@ table.tabTable td {
 	}
 	
 	main > nav > h2 {
+		position: fixed;
 		font-size: 1em;
 		text-align: left;
 	}
@@ -245,12 +248,13 @@ table.tabTable td {
 	}
 
 	main > nav ul {
+		display: block;
+		position: fixed;
+		top: 8em;
+		margin: 0;
 		background-color: inherit;
 		font-size: inherit;
 		text-align: inherit;
 		padding: inherit;
-		display: block;
-		margin: 0;
-		position: fixed;
 	}
 }
